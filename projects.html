@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects & Labs | Agaba Abel</title>
+  <meta name="description" content="Home SOC lab architecture, Wazuh SIEM deployment, TryHackMe and Hack The Box progression, and Python automation tools by Agaba Abel.">
+  <meta name="theme-color" content="#09090b">
+  <meta property="og:title" content="Projects & Labs | Agaba Abel">
+  <meta property="og:description" content="Home SOC lab, Wazuh SIEM, CTF write-ups and Python automation.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="images/favicon.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Image slots: show a dashed placeholder until the real file exists */
+    .slot { position: relative; background: #18181b; border: 1px solid #27272a; border-radius: 1rem; overflow: hidden; }
+    .slot img.shot { display: block; width: 100%; height: auto; }
+    .slot.empty { border: 1px dashed rgba(34,211,238,.35); min-height: 12rem; display: flex; align-items: center; justify-content: center; }
+    .slot.empty::after { content: attr(data-file); font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: rgba(34,211,238,.6); padding: 1rem; text-align: center; }
+    .tag { display: inline-block; font-size: .7rem; font-family: 'JetBrains Mono', monospace; padding: .2rem .6rem; border-radius: 9999px; border: 1px solid rgba(34,211,238,.3); background: rgba(34,211,238,.08); color: #67e8f9; }
+  </style>
+</head>
+
+<body class="bg-zinc-950 text-slate-100 font-sans antialiased selection:bg-cyan-400 selection:text-black">
+
+  <div id="progress" class="fixed top-0 left-0 h-0.5 bg-cyan-400 z-[60] w-0"></div>
+
+  <!-- ===================== NAVBAR (matches index.html) ===================== -->
+  <header class="fixed top-0 w-full z-50 bg-zinc-950/85 backdrop-blur-md border-b border-zinc-800/80">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center" aria-label="Main">
+      <a href="index.html" class="text-xl sm:text-2xl font-black tracking-tighter text-cyan-400">AGABA<span class="text-white">.SEC</span></a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="index.html#about" class="hover:text-cyan-400 transition">About</a></li>
+        <li><a href="index.html#experience" class="hover:text-cyan-400 transition">Experience</a></li>
+        <li><a href="index.html#skills" class="hover:text-cyan-400 transition">Skills</a></li>
+        <li><a href="index.html#credentials" class="hover:text-cyan-400 transition">Credentials</a></li>
+        <li><a href="projects.html" class="text-cyan-400" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact" class="bg-cyan-400 text-black px-4 py-2 rounded-lg font-bold hover:bg-cyan-300 transition">Contact</a></li>
+      </ul>
+
+      <button id="menu-btn" class="md:hidden p-2 rounded-lg border border-zinc-800 hover:border-cyan-400 transition" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800 bg-zinc-950">
+      <ul class="px-4 py-4 space-y-1 text-sm font-medium">
+        <li><a href="index.html#about" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">About</a></li>
+        <li><a href="index.html#experience" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">Experience</a></li>
+        <li><a href="index.html#skills" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">Skills</a></li>
+        <li><a href="index.html#credentials" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">Credentials</a></li>
+        <li><a href="projects.html" class="mobile-link block px-3 py-3 rounded-lg bg-zinc-900 text-cyan-400">Projects</a></li>
+        <li><a href="index.html#contact" class="mobile-link block px-3 py-3 rounded-lg bg-cyan-400 text-black font-bold text-center mt-2">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== PAGE HEADER ===================== -->
+    <section class="relative pt-32 pb-16 px-4 sm:px-6 overflow-hidden">
+      <div class="hero-grid absolute inset-0 pointer-events-none"></div>
+      <div class="absolute -top-32 -right-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="relative max-w-4xl mx-auto text-center reveal">
+        <p class="text-cyan-400 font-mono text-sm mb-3">// projects &amp; labs</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-5">Hands-on <span class="text-cyan-400">Security Work</span></h1>
+        <p class="text-zinc-400 text-base sm:text-lg font-light max-w-2xl mx-auto mb-8">
+          Practical execution behind the certificates: a home SOC lab, a Wazuh SIEM deployment, CTF progression and Python automation. Detailed write-ups live on Medium and Google Docs.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-2 mb-8 text-sm">
+          <a href="#home-soc-lab" class="px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/60 hover:border-cyan-400 hover:text-cyan-400 transition">Home SOC Lab</a>
+          <a href="#wazuh-siem" class="px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/60 hover:border-cyan-400 hover:text-cyan-400 transition">Wazuh SIEM</a>
+          <a href="#ctf" class="px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/60 hover:border-cyan-400 hover:text-cyan-400 transition">TryHackMe &amp; CTF</a>
+          <a href="#python-tools" class="px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/60 hover:border-cyan-400 hover:text-cyan-400 transition">Python Tools</a>
+          <a href="#writeups" class="px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/60 hover:border-cyan-400 hover:text-cyan-400 transition">Write-ups</a>
+        </div>
+
+        <a href="https://medium.com/@agabaabel52" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-bold hover:bg-cyan-400 transition shadow-xl">
+          <img src="https://www.google.com/s2/favicons?domain=medium.com&sz=64" alt="" class="w-5 h-5"> Read my write-ups on Medium
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== HOME SOC LAB ===================== -->
+    <section id="home-soc-lab" class="py-16 sm:py-20 bg-zinc-900/40 border-y border-zinc-800/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm mb-2">// 01 — architecture</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Home SOC Lab</h2>
+        <p class="text-zinc-400 max-w-3xl mb-10">
+          A multi-node enterprise-style security lab built for detection, monitoring and response practice. The diagram shows how the machines connect and where telemetry flows.
+        </p>
+
+        <div class="grid lg:grid-cols-5 gap-8 items-start">
+
+          <!-- Topology image slot -->
+          <figure class="lg:col-span-3 reveal">
+            <div class="slot" data-file="images/lab-topology.png">
+              <img src="images/lab-topology.png" alt="Home SOC lab network topology diagram" class="shot" loading="lazy" onerror="this.closest('.slot').classList.add('empty');this.remove()">
+            </div>
+            <figcaption class="text-xs text-zinc-500 mt-3 font-mono">Fig. 1 — Lab network topology</figcaption>
+          </figure>
+
+          <!-- Components -->
+          <div class="lg:col-span-2 space-y-4 reveal">
+            <h3 class="font-semibold text-lg">Lab components</h3>
+            <!-- Edit this list so it matches your real lab exactly -->
+            <ul class="space-y-3">
+              <li class="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-xl p-4 card-hover">
+                <span class="logo-tile shrink-0"><img src="https://cdn.simpleicons.org/wazuh/0891b2" alt="Wazuh logo" loading="lazy"></span>
+                <div><p class="font-semibold">Wazuh SIEM</p><p class="text-sm text-zinc-400">Central log analysis, alerting and endpoint monitoring.</p></div>
+              </li>
+              <li class="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-xl p-4 card-hover">
+                <span class="logo-tile shrink-0"><img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=128" alt="Microsoft logo" loading="lazy"></span>
+                <div><p class="font-semibold">Active Directory</p><p class="text-sm text-zinc-400">Windows domain environment generating realistic events.</p></div>
+              </li>
+              <li class="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-xl p-4 card-hover">
+                <span class="logo-tile shrink-0"><img src="https://cdn.simpleicons.org/ubuntu/E95420" alt="Ubuntu logo" loading="lazy"></span>
+                <div><p class="font-semibold">Ubuntu endpoints</p><p class="text-sm text-zinc-400">Linux hosts reporting to the SIEM through agents.</p></div>
+              </li>
+              <li class="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-xl p-4 card-hover">
+                <span class="logo-tile shrink-0"><img src="https://www.google.com/s2/favicons?domain=opnsense.org&sz=128" alt="OPNsense logo" loading="lazy"></span>
+                <div><p class="font-semibold">OPNsense firewall</p><p class="text-sm text-zinc-400">Network segmentation and traffic control between nodes.</p></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="tag">SIEM</span><span class="tag">Active Directory</span><span class="tag">Network segmentation</span><span class="tag">Log analysis</span><span class="tag">Detection</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WAZUH SIEM ===================== -->
+    <section id="wazuh-siem" class="py-16 sm:py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm mb-2">// 02 — deployment</p>
+        <div class="flex items-center gap-4 mb-4">
+          <img src="https://cdn.simpleicons.org/wazuh/22d3ee" alt="Wazuh logo" class="w-10 h-10" loading="lazy">
+          <h2 class="text-3xl sm:text-4xl font-bold">Wazuh SIEM Setup</h2>
+        </div>
+        <p class="text-zinc-400 max-w-3xl mb-10">
+          Deployment of a Wazuh SIEM across multiple nodes: installing the manager, enrolling agents, and reviewing the alerts they generate.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-10">
+          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover reveal">
+            <span class="font-mono text-cyan-400 text-sm">01</span>
+            <h3 class="font-semibold text-lg mt-1 mb-2">Deploy the stack</h3>
+            <p class="text-sm text-zinc-400">Install and configure the Wazuh manager, indexer and dashboard.</p>
+          </div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover reveal">
+            <span class="font-mono text-cyan-400 text-sm">02</span>
+            <h3 class="font-semibold text-lg mt-1 mb-2">Enroll agents</h3>
+            <p class="text-sm text-zinc-400">Connect Windows and Linux endpoints so their logs reach the SIEM.</p>
+          </div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover reveal">
+            <span class="font-mono text-cyan-400 text-sm">03</span>
+            <h3 class="font-semibold text-lg mt-1 mb-2">Triage alerts</h3>
+            <p class="text-sm text-zinc-400">Investigate generated alerts and practise SOC Level 1 workflows.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <figure class="reveal">
+            <div class="slot" data-file="images/wazuh-dashboard.png">
+              <img src="images/wazuh-dashboard.png" alt="Wazuh dashboard overview" class="shot" loading="lazy" onerror="this.closest('.slot').classList.add('empty');this.remove()">
+            </div>
+            <figcaption class="text-xs text-zinc-500 mt-3 font-mono">Fig. 2 — Wazuh dashboard overview</figcaption>
+          </figure>
+          <figure class="reveal">
+            <div class="slot" data-file="images/wazuh-alerts.png">
+              <img src="images/wazuh-alerts.png" alt="Wazuh security alerts view" class="shot" loading="lazy" onerror="this.closest('.slot').classList.add('empty');this.remove()">
+            </div>
+            <figcaption class="text-xs text-zinc-500 mt-3 font-mono">Fig. 3 — Security alerts and agent status</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TRYHACKME & CTF ===================== -->
+    <section id="ctf" class="py-16 sm:py-20 bg-zinc-900/40 border-y border-zinc-800/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm mb-2">// 03 — progression</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">TryHackMe &amp; CTF Showcase</h2>
+        <p class="text-zinc-400 max-w-3xl mb-10">
+          Structured learning on TryHackMe, enumeration practice on Hack The Box, and published write-ups of challenges I've solved.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+          <article class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=tryhackme.com&sz=128" alt="TryHackMe logo" loading="lazy"></span>
+                <span class="tag">Defensive</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">SOC Level 1 Path</h3>
+              <p class="text-sm text-zinc-400 mb-5">Completed the SOC Level 1 certification: alert triage, phishing analysis, SIEM fundamentals and incident handling.</p>
+            </div>
+            <!-- TODO: replace with your personal TryHackMe profile URL -->
+            <a href="https://tryhackme.com" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">View TryHackMe &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=hackthebox.com&sz=128" alt="Hack The Box logo" loading="lazy"></span>
+                <span class="tag">Offensive</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Machine Enumeration</h3>
+              <p class="text-sm text-zinc-400 mb-5">Hands-on enumeration, vulnerability research and exploitation practice on Hack The Box machines.</p>
+            </div>
+            <a href="https://profile.hackthebox.com/profile/019eb26d-df5f-7379-a3b3-3111854d2792" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">View HTB Profile &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=medium.com&sz=128" alt="Medium logo" loading="lazy"></span>
+                <span class="tag">Write-ups</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Challenge Write-ups</h3>
+              <p class="text-sm text-zinc-400 mb-5">Step-by-step walkthroughs of the rooms and challenges I've solved, published for others to learn from.</p>
+            </div>
+            <a href="https://medium.com/@agabaabel52" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">Read on Medium &rarr;</a>
+          </article>
+
+        </div>
+
+        <figure class="mt-8 reveal">
+          <div class="slot" data-file="images/tryhackme-progress.png">
+            <img src="images/tryhackme-progress.png" alt="TryHackMe progress and badges" class="shot" loading="lazy" onerror="this.closest('.slot').classList.add('empty');this.remove()">
+          </div>
+          <figcaption class="text-xs text-zinc-500 mt-3 font-mono">Fig. 4 — TryHackMe progress and badges</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== PYTHON TOOLS ===================== -->
+    <section id="python-tools" class="py-16 sm:py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm mb-2">// 04 — automation</p>
+        <div class="flex items-center gap-4 mb-4">
+          <img src="https://cdn.simpleicons.org/python/22d3ee" alt="Python logo" class="w-10 h-10" loading="lazy">
+          <h2 class="text-3xl sm:text-4xl font-bold">Python Automation Tools</h2>
+        </div>
+        <p class="text-zinc-400 max-w-3xl mb-10">
+          Custom backend scripting and utilities that remove repetitive work and make data handling faster and more reliable.
+        </p>
+
+        <!-- TODO: replace these cards with your real tools; add a GitHub link to each -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <article class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover reveal">
+            <h3 class="text-xl font-semibold mb-2">Workflow Automation Scripts</h3>
+            <p class="text-sm text-zinc-400 mb-4">Python scripts that automate repetitive technical and data-entry tasks.</p>
+            <div class="flex flex-wrap gap-2"><span class="tag">Python</span><span class="tag">Automation</span></div>
+          </article>
+          <article class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover reveal">
+            <h3 class="text-xl font-semibold mb-2">Data Pipeline Optimization</h3>
+            <p class="text-sm text-zinc-400 mb-4">Cleaning, transforming and moving data more efficiently with backend scripting.</p>
+            <div class="flex flex-wrap gap-2"><span class="tag">Python</span><span class="tag">Data</span><span class="tag">Backend</span></div>
+          </article>
+        </div>
+
+        <p class="text-sm text-zinc-500 mt-6">
+          Verified Python skills: <a href="https://www.freecodecamp.org/agaba52" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">freeCodeCamp profile &rarr;</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== WRITE-UPS ===================== -->
+    <section id="writeups" class="py-16 sm:py-20 bg-zinc-900/40 border-y border-zinc-800/60">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <p class="text-cyan-400 font-mono text-sm mb-2">// 05 — documentation</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Full Write-ups</h2>
+        <p class="text-zinc-400 mb-10">Every lab and challenge is documented. Pick where you'd like to read.</p>
+
+        <div class="grid sm:grid-cols-2 gap-6 text-left">
+          <a href="https://medium.com/@agabaabel52" target="_blank" rel="noopener" class="group bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover reveal">
+            <span class="logo-tile mb-4"><img src="https://www.google.com/s2/favicons?domain=medium.com&sz=128" alt="Medium logo" loading="lazy"></span>
+            <h3 class="text-lg font-semibold group-hover:text-cyan-400 transition">Medium Articles</h3>
+            <p class="text-sm text-zinc-400 mt-1">Published walkthroughs and lessons learned.</p>
+          </a>
+          <!-- TODO: replace # with the share link of your Google Doc -->
+          <a href="#" target="_blank" rel="noopener" class="group bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover reveal">
+            <span class="logo-tile mb-4"><img src="https://www.google.com/s2/favicons?domain=docs.google.com&sz=128" alt="Google Docs logo" loading="lazy"></span>
+            <h3 class="text-lg font-semibold group-hover:text-cyan-400 transition">Google Docs Lab Notes</h3>
+            <p class="text-sm text-zinc-400 mt-1">Detailed lab documentation and setup notes.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="py-20">
+      <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4">Like what you see?</h2>
+        <p class="text-zinc-400 mb-8">I'm open to junior cybersecurity, SOC analyst and IT infrastructure roles, on-site or remote.</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="mailto:agabaabel52@gmail.com" class="inline-flex items-center gap-2 bg-cyan-400 text-black px-8 py-4 rounded-xl font-bold hover:bg-cyan-300 transition shadow-lg shadow-cyan-400/20">
+            <img src="https://www.google.com/s2/favicons?domain=gmail.com&sz=64" alt="" class="w-5 h-5"> Email Me
+          </a>
+          <a href="index.html" class="border border-zinc-700 px-8 py-4 rounded-xl font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">&larr; Back to Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-zinc-800/60 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
+      <p>&copy; 2026 Agaba Abel. Built for high-impact security.</p>
+      <div class="flex gap-5">
+        <a href="#" class="hover:text-cyan-400 transition">Back to top ↑</a>
+        <a href="index.html" class="hover:text-cyan-400 transition">Home</a>
+        <a href="index.html#contact" class="hover:text-cyan-400 transition">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
