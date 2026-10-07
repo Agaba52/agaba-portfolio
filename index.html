@@ -1,181 +1,576 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agaba | Junior Cybersecurity Officer</title>
+  <title>Agaba Abel | Cybersecurity & IT Professional</title>
+  <meta name="description" content="Agaba Abel — SOC Level 1, Penetration Tester (TryHackMe), AI Tester, Phishing analyst, Wazuh SIEM home lab. Kampala, Uganda.">
+  <meta name="theme-color" content="#09090b">
+  <meta property="og:title" content="Agaba Abel | Cybersecurity & IT Professional">
+  <meta property="og:description" content="SOC Level 1 • Phishing Defense • Wazuh SIEM Lab • CTF Player • Kampala, Uganda">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="images/favicon.png">
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    body { font-family: 'Inter', sans-serif; }
-    .typing { overflow: hidden; white-space: nowrap; border-right: 3px solid #22d3ee; }
-    .project-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .project-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 0 30px rgba(34, 211, 238, 0.3); }
+    /* ---------- Fast-typist headline ---------- */
+    .type-h1{font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:-.03em;line-height:1.1;min-height:2.3em}
+    .type-h1 .name{color:#22d3ee;text-shadow:0 0 18px rgba(34,211,238,.55)}
+    .type-h1 .caret{display:inline-block;width:.55em;height:1em;margin-left:.08em;vertical-align:-.12em;background:#22d3ee;box-shadow:0 0 14px #22d3ee;animation:caret .7s steps(1) infinite}
+    .type-h1 .ch{animation:pop .12s ease-out both}
+    @keyframes caret{50%{opacity:0}}
+    @keyframes pop{from{opacity:0;transform:translateY(.25em) scale(1.25);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+
+    /* ---------- Services panel (replaces "AA") ---------- */
+    .svc-panel{position:relative;width:100%;height:100%;padding:1.1rem 1.1rem 1rem;display:flex;flex-direction:column;background:linear-gradient(160deg,rgba(9,9,11,.82),rgba(9,9,11,.94))}
+    .svc-panel .bar{display:flex;gap:6px;align-items:center;font:500 11px 'JetBrains Mono',monospace;color:#71717a;margin-bottom:.8rem}
+    .svc-panel .bar i{width:9px;height:9px;border-radius:50%;background:#3f3f46}
+    .svc-panel .bar i:first-child{background:#f87171}.svc-panel .bar i:nth-child(2){background:#fbbf24}.svc-panel .bar i:nth-child(3){background:#4ade80}
+    #svc-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem;flex:1;overflow:hidden}
+    #svc-list li{display:flex;gap:.55rem;align-items:flex-start;font-size:.8rem;line-height:1.3;color:#d4d4d8;animation:slideIn .45s cubic-bezier(.2,.8,.2,1) both}
+    #svc-list li::before{content:"";flex:none;width:7px;height:7px;margin-top:.35em;border-radius:50%;background:#22d3ee;box-shadow:0 0 8px #22d3ee}
+    #svc-list li.out{animation:slideOut .35s ease-in both}
+    #svc-list li b{color:#fff;font-weight:600}
+    @keyframes slideIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+    @keyframes slideOut{to{opacity:0;transform:translateX(14px)}}
+    .svc-dots{display:flex;gap:5px;margin-top:.6rem}
+    .svc-dots span{height:3px;flex:1;border-radius:2px;background:#27272a;overflow:hidden}
+    .svc-dots span.on{background:#22d3ee}
+
+    /* ---------- Phishing defense showcase ---------- */
+    .phish-card{position:relative;background:#0f0f12;border:1px solid #27272a;border-radius:1rem;padding:1.1rem;overflow:hidden;font-size:.85rem}
+    .phish-card .scan{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#22d3ee,transparent);box-shadow:0 0 16px 4px rgba(34,211,238,.45);animation:scan 6s linear infinite}
+    @keyframes scan{0%{top:0;opacity:0}8%{opacity:1}55%{top:100%;opacity:1}60%,100%{top:100%;opacity:0}}
+    .flag{display:inline-block;border-radius:.3rem;padding:0 .3rem;animation:flag 6s infinite both}
+    .flag.f1{animation-delay:0s}.flag.f2{animation-delay:.9s}.flag.f3{animation-delay:1.8s}.flag.f4{animation-delay:2.7s}
+    @keyframes flag{0%,12%{background:transparent;color:inherit}20%,88%{background:rgba(248,113,113,.2);color:#fca5a5;outline:1px solid rgba(248,113,113,.6)}100%{background:transparent}}
+    .stamp{position:absolute;right:1rem;bottom:1rem;border:3px solid #4ade80;color:#4ade80;font:800 1.3rem 'JetBrains Mono',monospace;padding:.15rem .7rem;border-radius:.4rem;transform:rotate(-10deg);animation:stamp 6s infinite both}
+    @keyframes stamp{0%,55%{opacity:0;transform:rotate(-10deg) scale(2.2)}62%,92%{opacity:1;transform:rotate(-10deg) scale(1)}100%{opacity:0}}
+    .pulse-ring{animation:ring 2s ease-out infinite}
+    @keyframes ring{0%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}100%{box-shadow:0 0 0 18px rgba(34,211,238,0)}}
+
+    /* ---------- Moving-picture tiles (story) ---------- */
+    .motion-tile{position:relative;aspect-ratio:4/3;border-radius:.9rem;overflow:hidden;background:#0c0c0f;border:1px solid #27272a}
+    .motion-tile svg,.motion-tile img.gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .motion-tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:.4rem .6rem;font:500 11px 'JetBrains Mono',monospace;color:#a1a1aa;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+    .m-hook{animation:hook 3s ease-in-out infinite}
+    @keyframes hook{0%,100%{transform:translateY(-8px)}50%{transform:translateY(14px)}}
+    .m-radar{transform-origin:100px 75px;animation:spin 3s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .m-blink{animation:blink 1.4s infinite}.m-blink.d2{animation-delay:.5s}.m-blink.d3{animation-delay:1s}
+    @keyframes blink{0%,40%,100%{opacity:.15}50%,80%{opacity:1}}
+    .m-log{animation:logup 6s linear infinite}
+    @keyframes logup{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+    .m-flow{stroke-dasharray:6 8;animation:flow 1s linear infinite}
+    @keyframes flow{to{stroke-dashoffset:-14}}
+
+    .link-logo{width:1.25rem;height:1.25rem;object-fit:contain}
+    @media (prefers-reduced-motion:reduce){.motion-tile *,.phish-card *,#svc-list li{animation:none!important}}
   </style>
 </head>
-<body class="bg-zinc-950 text-white">
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 w-full bg-zinc-950/80 backdrop-blur-md z-50 border-b border-zinc-800">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold tracking-tighter text-cyan-400">AGABA</h1>
-      <div class="flex gap-8 text-sm font-medium">
-        <a href="#about" class="hover:text-cyan-400 transition">About</a>
-        <a href="#projects" class="hover:text-cyan-400 transition">Projects</a>
+<body class="bg-zinc-950 text-slate-100 font-sans antialiased selection:bg-cyan-400 selection:text-black">
+
+  <div id="progress" class="fixed top-0 left-0 h-0.5 bg-cyan-400 z-[60] w-0"></div>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="fixed top-0 w-full z-50 bg-zinc-950/85 backdrop-blur-md border-b border-zinc-800/80">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center" aria-label="Main">
+      <a href="#home" class="text-xl sm:text-2xl font-black tracking-tighter text-cyan-400">AGABA<span class="text-white">.SEC</span></a>
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="#phishing" class="nav-link hover:text-cyan-400 transition">Phishing</a></li>
+        <li><a href="#about" class="nav-link hover:text-cyan-400 transition">About</a></li>
+        <li><a href="#experience" class="nav-link hover:text-cyan-400 transition">Experience</a></li>
+        <li><a href="#skills" class="nav-link hover:text-cyan-400 transition">Skills</a></li>
+        <li><a href="#credentials" class="nav-link hover:text-cyan-400 transition">Credentials</a></li>
+        <li><a href="projects.html" class="nav-link hover:text-cyan-400 transition">Projects</a></li>
+        <li><a href="#contact" class="bg-cyan-400 text-black px-4 py-2 rounded-lg font-bold hover:bg-cyan-300 transition">Contact</a></li>
+      </ul>
+      <button id="menu-btn" class="md:hidden p-2 rounded-lg border border-zinc-800 hover:border-cyan-400 transition" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800 bg-zinc-950">
+      <ul class="px-4 py-4 space-y-1 text-sm font-medium">
+        <li><a href="#phishing" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">Phishing</a></li>
+        <li><a href="#about" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">About</a></li>
+        <li><a href="#experience" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">Experience</a></li>
+        <li><a href="#skills" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">Skills</a></li>
+        <li><a href="#credentials" class="mobile-link block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">Credentials</a></li>
+        <li><a href="projects.html" class="block px-3 py-3 rounded-lg hover:bg-zinc-900 hover:text-cyan-400">Projects</a></li>
+        <li><a href="#contact" class="mobile-link block px-3 py-3 rounded-lg bg-cyan-400 text-black font-bold text-center mt-2">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="home" class="relative min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 overflow-hidden">
+      <div class="hero-grid absolute inset-0 pointer-events-none"></div>
+      <div class="absolute -top-32 -right-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 -left-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative max-w-6xl mx-auto w-full grid md:grid-cols-5 gap-12 items-center">
+
+        <div class="md:col-span-3 text-center md:text-left reveal">
+          <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
+            <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span></span>
+            Kampala, Uganda • Open to Global &amp; Remote Roles
+          </div>
+
+          <!-- Fast-typist headline (script at bottom) -->
+          <h1 id="hero-title" class="type-h1 text-4xl sm:text-6xl mb-4" aria-label="Hi, I'm Agaba Abel">
+            <span id="h1-text" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span>
+          </h1>
+
+          <p class="font-mono text-base sm:text-xl text-zinc-300 mb-5 h-8">
+            <span class="text-cyan-400">&gt;</span> <span id="typed"></span><span class="cursor">|</span>
+          </p>
+
+          <p class="text-sm sm:text-base text-cyan-300 font-medium leading-relaxed mb-6 max-w-2xl mx-auto md:mx-0">
+            Volunteer IT Support Technician @ NIRA Uganda | Penetration Tester @ TryHackMe | AI Tester | Data Operator, AI Data Trainer, Cybersecurity, CTF player, Python Scripting
+          </p>
+
+          <p class="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto md:mx-0 mb-8 font-light">
+            Building resilient defense systems, automating workflows with Python, and sharpening threat analysis through hands-on labs and competitive CTFs.
+          </p>
+
+          <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-8">
+            <a href="projects.html" class="bg-cyan-400 text-black px-7 py-3.5 rounded-xl font-bold hover:bg-cyan-300 transition shadow-lg shadow-cyan-400/20">Explore Labs &amp; Projects</a>
+            <a href="#contact" class="border border-zinc-700 bg-zinc-900/50 px-7 py-3.5 rounded-xl font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">Get in Touch</a>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 justify-center md:justify-start">
+            <span class="text-xs text-zinc-500 uppercase tracking-wider mr-1">Find me on</span>
+            <a href="https://www.linkedin.com/in/agaba-abel-a46107212/" target="_blank" rel="noopener" title="LinkedIn" class="logo-chip"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" alt="LinkedIn" class="w-5 h-5" loading="lazy"></a>
+            <a href="https://github.com/Agaba52" target="_blank" rel="noopener" title="GitHub" class="logo-chip"><img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" class="w-5 h-5" loading="lazy"></a>
+            <a href="https://hackerone.com/agaba-abel?type=user" target="_blank" rel="noopener" title="HackerOne" class="logo-chip"><img src="https://cdn.simpleicons.org/hackerone/ffffff" alt="HackerOne" class="w-5 h-5" loading="lazy"></a>
+            <a href="https://cybertalents.com/members/Agaba/profile" target="_blank" rel="noopener" title="CyberTalents" class="logo-chip"><img src="https://www.google.com/s2/favicons?domain=cybertalents.com&sz=64" alt="CyberTalents" class="w-5 h-5" loading="lazy"></a>
+            <a href="https://tryhackme.com" target="_blank" rel="noopener" title="TryHackMe" class="logo-chip"><img src="https://www.google.com/s2/favicons?domain=tryhackme.com&sz=64" alt="TryHackMe" class="w-5 h-5" loading="lazy"></a>
+            <a href="https://profile.hackthebox.com/profile/019eb26d-df5f-7379-a3b3-3111854d2792" target="_blank" rel="noopener" title="Hack The Box" class="logo-chip"><img src="https://www.google.com/s2/favicons?domain=hackthebox.com&sz=64" alt="Hack The Box" class="w-5 h-5" loading="lazy"></a>
+            <a href="https://www.freecodecamp.org/agaba52" target="_blank" rel="noopener" title="freeCodeCamp" class="logo-chip"><img src="https://www.google.com/s2/favicons?domain=freecodecamp.org&sz=64" alt="freeCodeCamp" class="w-5 h-5" loading="lazy"></a>
+            <a href="mailto:agabaabel52@gmail.com" title="Email" class="logo-chip"><img src="https://www.google.com/s2/favicons?domain=gmail.com&sz=64" alt="Email" class="w-5 h-5" loading="lazy"></a>
+          </div>
+        </div>
+
+        <!-- Services panel: photo (images/profile.jpg) stays as a dim backdrop if present -->
+        <div class="md:col-span-2 flex justify-center reveal">
+          <div class="relative">
+            <div class="absolute -inset-1 bg-gradient-to-tr from-cyan-400 to-cyan-700 rounded-3xl blur opacity-40"></div>
+            <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl overflow-hidden border border-cyan-500/40 bg-zinc-900">
+              <img src="images/profile.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30" onerror="this.remove()">
+              <div class="svc-panel">
+                <div class="bar"><i></i><i></i><i></i><span class="ml-2">soc-services.sh</span></div>
+                <ul id="svc-list" aria-live="polite"></ul>
+                <div class="svc-dots" id="svc-dots"></div>
+              </div>
+            </div>
+            <div class="absolute -bottom-4 -left-4 bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2 text-xs font-mono shadow-xl">
+              <span class="text-cyan-400">services</span> = <span class="text-green-400">"SOC for your team"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PHISHING DEFENSE (eye-catcher) ===================== -->
+    <section id="phishing" class="py-16 sm:py-20 border-y border-red-500/20 bg-gradient-to-b from-red-950/20 to-zinc-950">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
+
+        <div class="reveal">
+          <p class="text-red-400 font-mono text-sm mb-2">// threat #1 in Uganda</p>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">Phishing is where most attacks start. I stop it.</h2>
+          <p class="text-zinc-400 mb-6">Fake mobile-money alerts, spoofed bank mails, fraudulent job offers and cloned login pages hit Ugandan organisations daily. I investigate the message, trace the infrastructure and give your team a clear verdict and a fix.</p>
+          <ul class="grid sm:grid-cols-2 gap-3 text-sm text-zinc-300">
+            <li class="flex gap-2"><span class="text-cyan-400">▸</span>Email header &amp; sender spoofing analysis</li>
+            <li class="flex gap-2"><span class="text-cyan-400">▸</span>URL, domain &amp; attachment inspection</li>
+            <li class="flex gap-2"><span class="text-cyan-400">▸</span>Spearphishing payload investigation</li>
+            <li class="flex gap-2"><span class="text-cyan-400">▸</span>Staff awareness &amp; reporting playbooks</li>
+          </ul>
+          <a href="#contact" class="inline-block mt-7 bg-cyan-400 text-black px-6 py-3 rounded-xl font-bold hover:bg-cyan-300 transition pulse-ring">Report a suspicious message</a>
+        </div>
+
+        <!-- Animated live analysis -->
+        <div class="phish-card reveal" role="img" aria-label="Animation of a phishing message being analysed and blocked">
+          <div class="scan"></div>
+          <p class="font-mono text-xs text-zinc-500 mb-3">phishing-triage — incoming message</p>
+          <p class="mb-1"><span class="text-zinc-500">From:</span> <span class="flag f1">support@mobi1e-money-ug.com</span></p>
+          <p class="mb-3"><span class="text-zinc-500">Subject:</span> Mobile Money received UGX 2,500,000</p>
+          <p class="text-zinc-300 leading-relaxed mb-5">Dear customer, <span class="flag f2">your account will be suspended in 30 minutes</span>. Confirm your PIN now: <span class="flag f3">http://bit.ly/claim-ugx</span><br><span class="flag f4">Do not tell anyone.</span></p>
+          <div class="grid grid-cols-4 gap-2 text-center text-[10px] font-mono text-zinc-400">
+            <span class="border border-zinc-800 rounded py-1">spoofed domain</span>
+            <span class="border border-zinc-800 rounded py-1">fake urgency</span>
+            <span class="border border-zinc-800 rounded py-1">short link</span>
+            <span class="border border-zinc-800 rounded py-1">secrecy ask</span>
+          </div>
+          <div class="h-12"></div>
+          <div class="stamp">BLOCKED</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== QUICK STATS ===================== -->
+    <section class="border-b border-zinc-800/60 bg-zinc-900/40">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
+        <div class="reveal"><p class="text-2xl font-black text-cyan-400">First Class</p><p class="text-xs sm:text-sm text-zinc-400 mt-1">Bachelor of Computer Applications</p></div>
+        <div class="reveal"><p class="text-2xl font-black text-cyan-400">SOC L1</p><p class="text-xs sm:text-sm text-zinc-400 mt-1">TryHackMe Certified</p></div>
+        <div class="reveal"><p class="text-2xl font-black text-cyan-400">Pen Tester</p><p class="text-xs sm:text-sm text-zinc-400 mt-1">TryHackMe</p></div>
+        <div class="reveal"><p class="text-2xl font-black text-cyan-400">AI Tester</p><p class="text-xs sm:text-sm text-zinc-400 mt-1">Model &amp; output evaluation</p></div>
+        <div class="reveal"><p class="text-2xl font-black text-cyan-400">Wazuh SIEM</p><p class="text-xs sm:text-sm text-zinc-400 mt-1">Multi-node Home Lab</p></div>
+        <div class="reveal"><p class="text-2xl font-black text-cyan-400">Python</p><p class="text-xs sm:text-sm text-zinc-400 mt-1">Automation &amp; Scripting</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT / STORY ===================== -->
+    <section id="about" class="py-20 sm:py-24">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm text-center mb-2">// about me</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-10">My Story</h2>
+
+        <!-- Moving pictures. To use real GIFs, drop files in images/gifs/ (phishing.gif, radar.gif, terminal.gif, network.gif) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 reveal">
+          <figure class="motion-tile">
+            <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><line x1="100" y1="0" x2="100" y2="50" stroke="#52525b"/><g class="m-hook"><path d="M100 50v30a14 14 0 1 1-14-14" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/><rect x="70" y="100" width="60" height="38" rx="5" fill="#18181b" stroke="#f87171"/><path d="M72 104l28 18 28-18" fill="none" stroke="#f87171" stroke-width="2"/></g></svg>
+            <img class="gif" src="images/gifs/phishing.gif" alt="" onerror="this.remove()">
+            <figcaption>phishing caught</figcaption>
+          </figure>
+          <figure class="motion-tile">
+            <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g fill="none" stroke="#164e63"><circle cx="100" cy="75" r="20"/><circle cx="100" cy="75" r="40"/><circle cx="100" cy="75" r="60"/></g><g class="m-radar"><path d="M100 75L100 15A60 60 0 0 1 152 45Z" fill="rgba(34,211,238,.35)"/></g><circle class="m-blink" cx="130" cy="50" r="4" fill="#f87171"/><circle class="m-blink d2" cx="70" cy="100" r="4" fill="#f87171"/><circle class="m-blink d3" cx="118" cy="105" r="4" fill="#fbbf24"/></svg>
+            <img class="gif" src="images/gifs/radar.gif" alt="" onerror="this.remove()">
+            <figcaption>threat hunting</figcaption>
+          </figure>
+          <figure class="motion-tile">
+            <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g font-family="monospace" font-size="9" fill="#4ade80"><g class="m-log"><text x="8" y="16">[wazuh] agent 003 connected</text><text x="8" y="32" fill="#fbbf24">[rule 5710] ssh brute force</text><text x="8" y="48">[wazuh] fim: /etc/passwd ok</text><text x="8" y="64" fill="#f87171">[rule 87105] malware hash</text><text x="8" y="80">[wazuh] agent 004 connected</text><text x="8" y="96" fill="#fbbf24">[rule 31101] web 400 burst</text><text x="8" y="112">[wazuh] alert triaged</text><text x="8" y="128" fill="#f87171">[rule 100002] phish url</text><text x="8" y="144">[wazuh] agent 003 connected</text><text x="8" y="160" fill="#fbbf24">[rule 5710] ssh brute force</text><text x="8" y="176">[wazuh] fim: /etc/passwd ok</text><text x="8" y="192" fill="#f87171">[rule 87105] malware hash</text><text x="8" y="208">[wazuh] agent 004 connected</text><text x="8" y="224" fill="#fbbf24">[rule 31101] web 400 burst</text><text x="8" y="240">[wazuh] alert triaged</text><text x="8" y="256" fill="#f87171">[rule 100002] phish url</text></g></g></svg>
+            <img class="gif" src="images/gifs/terminal.gif" alt="" onerror="this.remove()">
+            <figcaption>SIEM alerts</figcaption>
+          </figure>
+          <figure class="motion-tile">
+            <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g class="m-flow" stroke="#22d3ee" stroke-width="2" fill="none"><path d="M40 40L100 75"/><path d="M40 110L100 75"/><path d="M160 40L100 75"/><path d="M160 110L100 75"/></g><g fill="#18181b" stroke="#22d3ee"><circle cx="40" cy="40" r="10"/><circle cx="40" cy="110" r="10"/><circle cx="160" cy="40" r="10"/><circle cx="160" cy="110" r="10"/></g><path d="M100 55l18 8v14c0 10-8 17-18 21-10-4-18-11-18-21V63z" fill="#164e63" stroke="#22d3ee" stroke-width="2"/></svg>
+            <img class="gif" src="images/gifs/network.gif" alt="" onerror="this.remove()">
+            <figcaption>defended network</figcaption>
+          </figure>
+        </div>
+
+        <div class="bg-zinc-900/80 border border-zinc-800 p-6 sm:p-10 rounded-2xl shadow-xl space-y-6 text-zinc-300 leading-relaxed text-base sm:text-lg font-light reveal max-w-4xl mx-auto">
+          <p>
+            As a <strong class="text-white font-semibold">Volunteer IT Support Technician at the National Identification and Registration Authority (NIRA) Uganda</strong>, I contributed directly to the Mass Renewal Project in my home district by installing software that improved biometric accuracy and helping resolve critical system errors. This field experience gave me practical exposure to managing private networks, supporting internal infrastructure, and enforcing data security compliance under real-world pressure.
+          </p>
+          <p>
+            I graduated with a <strong class="text-white font-semibold">First Class Bachelor of Computer Applications degree from Amity University</strong>, anchoring my technical capabilities in strong computing fundamentals. Since then I have channeled my passion for defensive and offensive security into continuous execution: earning the <strong class="text-white font-semibold">TryHackMe SOC Level 1</strong> certification, deploying multi-node enterprise security labs with Wazuh SIEM, completing many rooms on CyberTalents, and passing rigorous backend programming assessments.
+          </p>
+          <p>
+            Whether I am writing custom automation scripts in Python, investigating spearphishing payloads, or optimizing data pipelines, my goal remains steadfast: building secure, dependable systems that protect people and data.
+          </p>
+        </div>
+
+        <!-- Contact line -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-8 reveal">
+          <a href="mailto:agabaabel52@gmail.com" class="logo-chip px-3 gap-2 inline-flex items-center text-sm"><img src="https://www.google.com/s2/favicons?domain=gmail.com&sz=64" alt="" class="link-logo"> Email</a>
+          <a href="https://www.linkedin.com/in/agaba-abel-a46107212/" target="_blank" rel="noopener" class="logo-chip px-3 gap-2 inline-flex items-center text-sm"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" alt="" class="link-logo"> LinkedIn</a>
+          <a href="https://github.com/Agaba52" target="_blank" rel="noopener" class="logo-chip px-3 gap-2 inline-flex items-center text-sm"><img src="https://cdn.simpleicons.org/github/ffffff" alt="" class="link-logo"> GitHub</a>
+          <a href="https://hackerone.com/agaba-abel?type=user" target="_blank" rel="noopener" class="logo-chip px-3 gap-2 inline-flex items-center text-sm"><img src="https://cdn.simpleicons.org/hackerone/ffffff" alt="" class="link-logo"> HackerOne</a>
+          <a href="https://cybertalents.com/members/Agaba/profile" target="_blank" rel="noopener" class="logo-chip px-3 gap-2 inline-flex items-center text-sm"><img src="https://www.google.com/s2/favicons?domain=cybertalents.com&sz=64" alt="" class="link-logo"> CyberTalents</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EXPERIENCE & EDUCATION ===================== -->
+    <section id="experience" class="py-20 sm:py-24 bg-zinc-900/40 border-y border-zinc-800/60">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm text-center mb-2">// experience &amp; education</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Where I've Worked &amp; Studied</h2>
+
+        <ol class="relative border-l border-zinc-800 ml-3 space-y-10">
+
+          <li class="ml-8 reveal">
+            <span class="absolute -left-[22px] flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden">
+              <img src="https://www.google.com/s2/favicons?domain=nira.go.ug&sz=128" alt="NIRA Uganda logo" class="w-8 h-8 object-contain" loading="lazy" onerror="this.replaceWith(document.createTextNode('N'))">
+            </span>
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
+              <h3 class="text-lg sm:text-xl font-semibold">Volunteer IT Support Technician</h3>
+              <p class="text-cyan-400 text-sm font-medium mb-3">National Identification and Registration Authority (NIRA) Uganda</p>
+              <ul class="space-y-2 text-zinc-400 text-sm sm:text-base list-disc list-inside marker:text-cyan-400">
+                <li>Supported the Mass Renewal Project in my home district.</li>
+                <li>Installed software that improved biometric capture accuracy.</li>
+                <li>Helped resolve critical system errors in the field.</li>
+                <li>Gained hands-on exposure to private networks, internal infrastructure and data security compliance.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="ml-8 reveal">
+            <span class="absolute -left-[22px] flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden">
+              <img src="images/amity-logo.png" alt="Amity University logo" class="w-9 h-9 object-contain" onerror="this.onerror=function(){this.replaceWith(document.createTextNode('A'))};this.src='https://www.google.com/s2/favicons?domain=amity.edu&sz=128'">
+            </span>
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
+              <div class="flex items-center gap-4 mb-3">
+                <span class="flex-none w-14 h-14 rounded-xl bg-white flex items-center justify-center p-1.5">
+                  <img src="images/amity-logo.png" alt="Amity University logo" class="max-w-full max-h-full object-contain" onerror="this.onerror=function(){this.parentElement.remove()};this.src='https://www.google.com/s2/favicons?domain=amity.edu&sz=128'">
+                </span>
+                <div>
+                  <h3 class="text-lg sm:text-xl font-semibold">Bachelor of Computer Applications — First Class</h3>
+                  <p class="text-cyan-400 text-sm font-medium">Amity University</p>
+                </div>
+              </div>
+              <p class="text-zinc-400 text-sm sm:text-base">Built the computing fundamentals behind my security, programming and systems work.</p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== SKILLS ===================== -->
+    <section id="skills" class="py-20 sm:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm text-center mb-2">// toolkit</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Skills &amp; Focus Areas</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl card-hover reveal">
+            <div class="flex items-center gap-3 mb-4"><img src="https://cdn.simpleicons.org/wazuh/22d3ee" alt="" class="w-7 h-7" loading="lazy"><h3 class="font-semibold">Defensive Security</h3></div>
+            <ul class="text-sm text-zinc-400 space-y-1.5"><li>SOC analysis (Level 1)</li><li>Wazuh SIEM deployment</li><li>Log &amp; alert triage</li><li>Phishing &amp; spearphishing investigation</li></ul>
+          </div>
+          <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl card-hover reveal">
+            <div class="flex items-center gap-3 mb-4"><img src="https://cdn.simpleicons.org/hackthebox/22d3ee" alt="" class="w-7 h-7" loading="lazy"><h3 class="font-semibold">Offensive Security</h3></div>
+            <ul class="text-sm text-zinc-400 space-y-1.5"><li>Penetration testing (TryHackMe)</li><li>CTF competitions</li><li>Machine enumeration</li><li>Vulnerability research</li></ul>
+          </div>
+          <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl card-hover reveal">
+            <div class="flex items-center gap-3 mb-4"><img src="https://cdn.simpleicons.org/python/22d3ee" alt="" class="w-7 h-7" loading="lazy"><h3 class="font-semibold">Python &amp; Automation</h3></div>
+            <ul class="text-sm text-zinc-400 space-y-1.5"><li>Custom automation scripts</li><li>Data pipeline optimization</li><li>Backend programming</li><li>freeCodeCamp certified</li></ul>
+          </div>
+          <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl card-hover reveal">
+            <div class="flex items-center gap-3 mb-4"><img src="https://cdn.simpleicons.org/linux/22d3ee" alt="" class="w-7 h-7" loading="lazy"><h3 class="font-semibold">IT Support, Data &amp; AI</h3></div>
+            <ul class="text-sm text-zinc-400 space-y-1.5"><li>Field IT support</li><li>Private network management</li><li>Data operations &amp; AI data training</li><li>AI testing</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CREDENTIALS ===================== -->
+    <section id="credentials" class="py-20 sm:py-24 bg-zinc-900/40 border-y border-zinc-800/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm text-center mb-2">// verified</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4">Credentials &amp; Verified Profiles</h2>
+        <p class="text-zinc-400 text-center mb-12">Click through to view my official certifications and competitive security profiles.</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=coursera.org&sz=128" alt="Coursera logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Certification</span></div>
+              <h3 class="text-xl font-semibold mb-1">Google Cybersecurity</h3>
+              <p class="text-zinc-400 text-sm mb-6">Foundational security principles, framework alignment (NIST/GDPR), and operational threat defense.</p>
+            </div>
+            <a href="https://www.coursera.org/account/accomplishments/verify/TTGQWX0JTA2J" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">Verify on Coursera &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=tryhackme.com&sz=128" alt="TryHackMe logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Cyber Defense</span></div>
+              <h3 class="text-xl font-semibold mb-1">TryHackMe — SOC Level 1</h3>
+              <p class="text-zinc-400 text-sm mb-6">SOC Level 1 certification holder, penetration-testing room solver and active security analyst trainee.</p>
+            </div>
+            <!-- TODO: replace with your personal TryHackMe profile URL -->
+            <a href="https://tryhackme.com" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">View Profile &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=cybertalents.com&sz=128" alt="CyberTalents logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Cyber Talent</span></div>
+              <h3 class="text-xl font-semibold mb-1">CyberTalents</h3>
+              <p class="text-zinc-400 text-sm mb-6">Many rooms and challenges completed across security categories.</p>
+            </div>
+            <a href="https://cybertalents.com/members/Agaba/profile" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">View CyberTalents Profile &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://cdn.simpleicons.org/hackerone/000000" alt="HackerOne logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Bug Bounty</span></div>
+              <h3 class="text-xl font-semibold mb-1">HackerOne</h3>
+              <p class="text-zinc-400 text-sm mb-6">Hacker profile for responsible vulnerability disclosure and bug bounty work.</p>
+            </div>
+            <a href="https://hackerone.com/agaba-abel?type=user" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">View HackerOne Profile &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://cdn.simpleicons.org/github/000000" alt="GitHub logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Code</span></div>
+              <h3 class="text-xl font-semibold mb-1">GitHub</h3>
+              <p class="text-zinc-400 text-sm mb-6">Python scripts, automation and security tooling.</p>
+            </div>
+            <a href="https://github.com/Agaba52" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">View GitHub &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=hackthebox.com&sz=128" alt="Hack The Box logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Offensive Security</span></div>
+              <h3 class="text-xl font-semibold mb-1">Hack The Box</h3>
+              <p class="text-zinc-400 text-sm mb-6">Machine enumeration, vulnerability research and penetration testing practice.</p>
+            </div>
+            <a href="https://profile.hackthebox.com/profile/019eb26d-df5f-7379-a3b3-3111854d2792" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">View HTB Profile &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=freecodecamp.org&sz=128" alt="freeCodeCamp logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Programming</span></div>
+              <h3 class="text-xl font-semibold mb-1">freeCodeCamp Python</h3>
+              <p class="text-zinc-400 text-sm mb-6">Python developer credential backed by rigorous algorithmic examinations.</p>
+            </div>
+            <a href="https://www.freecodecamp.org/agaba52" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">View Profile &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=10fastfingers.com&sz=128" alt="10FastFingers logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Productivity</span></div>
+              <h3 class="text-xl font-semibold mb-1">10FastFingers Speed</h3>
+              <p class="text-zinc-400 text-sm mb-6">Documented typing speed for efficient technical reporting and terminal work.</p>
+            </div>
+            <a href="https://10fastfingers.com/user/agaba-abel" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">Check Score &rarr;</a>
+          </article>
+
+          <article class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between card-hover reveal">
+            <div>
+              <div class="flex items-center justify-between mb-4"><span class="logo-tile"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=128" alt="LinkedIn logo" loading="lazy"></span><span class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Network</span></div>
+              <h3 class="text-xl font-semibold mb-1">LinkedIn Profile</h3>
+              <p class="text-zinc-400 text-sm mb-6">Connect for professional updates, security write-ups and industry networking.</p>
+            </div>
+            <a href="https://www.linkedin.com/in/agaba-abel-a46107212/" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">Connect on LinkedIn &rarr;</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECTS TEASER ===================== -->
+    <section class="py-20 sm:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm text-center mb-2">// hands-on</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Featured Labs &amp; Projects</h2>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <a href="projects.html#home-soc-lab" class="group bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden card-hover reveal">
+            <div class="h-40 bg-zinc-800 flex items-center justify-center overflow-hidden">
+              <img src="images/lab-topology.png" alt="Home SOC lab network topology" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=&quot;font-mono text-cyan-400/60 text-sm&quot;>images/lab-topology.png</span>'">
+            </div>
+            <div class="p-6"><h3 class="font-semibold text-lg mb-1 group-hover:text-cyan-400 transition">Home SOC Lab</h3><p class="text-sm text-zinc-400">Multi-node enterprise security lab for detection and response practice.</p></div>
+          </a>
+          <a href="projects.html#wazuh-siem" class="group bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden card-hover reveal">
+            <div class="h-40 bg-zinc-800 flex items-center justify-center"><img src="https://cdn.simpleicons.org/wazuh/22d3ee" alt="Wazuh logo" class="w-16 h-16" loading="lazy"></div>
+            <div class="p-6"><h3 class="font-semibold text-lg mb-1 group-hover:text-cyan-400 transition">Wazuh SIEM Deployment</h3><p class="text-sm text-zinc-400">Agents, rules and alerting across a multi-node environment.</p></div>
+          </a>
+          <a href="projects.html#ctf" class="group bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden card-hover reveal">
+            <div class="h-40 bg-zinc-800 flex items-center justify-center gap-6">
+              <img src="https://cdn.simpleicons.org/tryhackme/22d3ee" alt="TryHackMe logo" class="w-14 h-14" loading="lazy">
+              <img src="https://cdn.simpleicons.org/hackthebox/22d3ee" alt="Hack The Box logo" class="w-14 h-14" loading="lazy">
+            </div>
+            <div class="p-6"><h3 class="font-semibold text-lg mb-1 group-hover:text-cyan-400 transition">CTF &amp; Lab Progression</h3><p class="text-sm text-zinc-400">TryHackMe rooms, CyberTalents challenges and Hack The Box machines, documented.</p></div>
+          </a>
+        </div>
+
+        <div class="text-center mt-10">
+          <a href="projects.html" class="inline-block border border-cyan-400/60 text-cyan-400 px-8 py-3 rounded-xl font-semibold hover:bg-cyan-400 hover:text-black transition">See all projects &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section id="contact" class="py-20 sm:py-24 bg-zinc-900/40 border-t border-zinc-800/60">
+      <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+        <p class="text-cyan-400 font-mono text-sm mb-2">// contact</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Let's Work Together</h2>
+        <p class="text-zinc-400 mb-8">I'm actively looking for junior cybersecurity roles, SOC analyst opportunities, and IT infrastructure positions — on-site or remote.</p>
+
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="mailto:agabaabel52@gmail.com" class="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-xl font-bold hover:bg-cyan-400 transition shadow-xl"><img src="https://www.google.com/s2/favicons?domain=gmail.com&sz=64" alt="" class="w-5 h-5"> Email Me Directly</a>
+          <a href="https://www.linkedin.com/in/agaba-abel-a46107212/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-zinc-700 px-8 py-4 rounded-xl font-semibold hover:border-cyan-400 hover:text-cyan-400 transition"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" alt="" class="w-5 h-5"> LinkedIn</a>
+        </div>
+        <div class="flex flex-wrap gap-3 justify-center mt-4 text-sm">
+          <a href="https://github.com/Agaba52" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-zinc-800 px-5 py-2.5 rounded-lg hover:border-cyan-400 hover:text-cyan-400 transition"><img src="https://cdn.simpleicons.org/github/ffffff" alt="" class="link-logo"> GitHub</a>
+          <a href="https://hackerone.com/agaba-abel?type=user" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-zinc-800 px-5 py-2.5 rounded-lg hover:border-cyan-400 hover:text-cyan-400 transition"><img src="https://cdn.simpleicons.org/hackerone/ffffff" alt="" class="link-logo"> HackerOne</a>
+          <a href="https://cybertalents.com/members/Agaba/profile" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-zinc-800 px-5 py-2.5 rounded-lg hover:border-cyan-400 hover:text-cyan-400 transition"><img src="https://www.google.com/s2/favicons?domain=cybertalents.com&sz=64" alt="" class="link-logo"> CyberTalents</a>
+        </div>
+        <p class="mt-6 text-sm text-zinc-500 font-mono">agabaabel52@gmail.com</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-zinc-800/60 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
+      <p>&copy; 2026 Agaba Abel. Built for high-impact security.</p>
+      <div class="flex gap-5">
+        <a href="#home" class="hover:text-cyan-400 transition">Back to top ↑</a>
+        <a href="projects.html" class="hover:text-cyan-400 transition">Projects</a>
         <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
       </div>
     </div>
-  </nav>
+  </footer>
 
-  <!-- Hero with Typing Effect -->
-  <section class="min-h-screen flex items-center justify-center pt-20">
-    <div class="max-w-4xl mx-auto text-center px-6">
-      <h2 class="text-6xl font-bold mb-6">Hi, I'm <span class="text-cyan-400">Agaba</span></h2>
-      <h1 id="typed" class="typing text-5xl md:text-7xl font-semibold text-white mb-8 h-20"></h1>
-      <p class="text-xl text-zinc-400 max-w-2xl mx-auto">Junior Cybersecurity Officer passionate about ethical hacking, CTF challenges, and building secure systems.</p>
-      <div class="mt-10 flex gap-4 justify-center">
-        <a href="#projects" class="bg-cyan-400 text-black px-8 py-4 rounded-full font-semibold hover:bg-white transition">View My Work</a>
-        <a href="#contact" class="border border-cyan-400 px-8 py-4 rounded-full font-semibold hover:bg-cyan-400/10 transition">Get in Touch</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="py-24 bg-zinc-900">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
-      <p class="text-lg text-zinc-300 leading-relaxed text-center">
-        I'm Agaba from Kampala, Uganda — a Junior Cybersecurity Officer focused on offensive security, penetration testing basics, and Capture The Flag (CTF) competitions. 
-        I participate actively on platforms like CyberTalents and TryHackMe to sharpen my skills in real-world scenarios. Ready to contribute to security teams!
-      </p>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section class="py-20 bg-zinc-950">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">Skills</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="bg-zinc-900 p-6 rounded-2xl text-center hover:border-cyan-400 border border-transparent transition">Linux & Bash</div>
-        <div class="bg-zinc-900 p-6 rounded-2xl text-center hover:border-cyan-400 border border-transparent transition">Python Scripting</div>
-        <div class="bg-zinc-900 p-6 rounded-2xl text-center hover:border-cyan-400 border border-transparent transition">CTF & Ethical Hacking</div>
-        <div class="bg-zinc-900 p-6 rounded-2xl text-center hover:border-cyan-400 border border-transparent transition">Network Fundamentals</div>
-        <div class="bg-zinc-900 p-6 rounded-2xl text-center hover:border-cyan-400 border border-transparent transition">Reverse Shells & Exploitation</div>
-        <div class="bg-zinc-900 p-6 rounded-2xl text-center hover:border-cyan-400 border border-transparent transition">TryHackMe / CyberTalents</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="py-24 bg-zinc-900">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">My Projects & Challenges</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-
-        <!-- Project 1: Linux Reverse Shell -->
-        <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden border border-zinc-800">
-          <div class="h-52 bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center text-4xl font-bold">Reverse Shell</div>
-          <div class="p-6">
-            <h3 class="font-semibold text-xl mb-2">Custom Linux Reverse Shell</h3>
-            <p class="text-zinc-400 text-sm">Built a simple reverse shell in Python/Bash that connects back to a listener and executes commands like ls, whoami, pwd, cat, etc.</p>
-            <div class="mt-4 flex gap-2 flex-wrap">
-              <span class="text-xs bg-zinc-800 px-3 py-1 rounded">Python</span>
-              <span class="text-xs bg-zinc-800 px-3 py-1 rounded">Bash</span>
-              <span class="text-xs bg-zinc-800 px-3 py-1 rounded">Sockets</span>
-            </div>
-            <a href="https://github.com/Agaba52" target="_blank" class="block mt-6 text-cyan-400 hover:underline">View on GitHub →</a>
-          </div>
-        </div>
-
-        <!-- Project 2: TryHackMe CTFs -->
-        <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden border border-zinc-800">
-          <div class="h-52 bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center text-4xl font-bold">TryHackMe</div>
-          <div class="p-6">
-            <h3 class="font-semibold text-xl mb-2">TryHackMe CTF Challenges</h3>
-            <p class="text-zinc-400 text-sm">Actively solving rooms on TryHackMe — covering web exploits, Linux priv esc, network scanning, forensics, and more.</p>
-            <div class="mt-4 flex gap-2">
-              <span class="text-xs bg-zinc-800 px-3 py-1 rounded">Penetration Testing</span>
-              <span class="text-xs bg-zinc-800 px-3 py-1 rounded">CTF</span>
-            </div>
-            <a href="https://tryhackme.com/p/Agaba52" target="_blank" class="block mt-6 text-cyan-400 hover:underline">My TryHackMe Profile →</a>
-          </div>
-        </div>
-
-        <!-- Project 3: CyberTalents CTF -->
-        <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden border border-zinc-800">
-          <div class="h-52 bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center text-4xl font-bold">CyberTalents</div>
-          <div class="p-6">
-            <h3 class="font-semibold text-xl mb-2">CyberTalents CTF Participation</h3>
-            <p class="text-zinc-400 text-sm">Participated in Capture The Flag events on CyberTalents (including Uganda National Cybersecurity CTF).</p>
-            <div class="mt-4 flex gap-2">
-              <span class="text-xs bg-zinc-800 px-3 py-1 rounded">CTF</span>
-              <span class="text-xs bg-zinc-800 px-3 py-1 rounded">Ethical Hacking</span>
-            </div>
-            <a href="https://cybertalents.com/members/Agaba/profile" target="_blank" class="block mt-6 text-cyan-400 hover:underline">View My CyberTalents Profile →</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-24 bg-zinc-950">
-    <div class="max-w-2xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-8">Let's Connect</h2>
-      <p class="text-zinc-400 mb-10">I'm open to junior cybersecurity roles, internships, or collaborations. Reach out!</p>
-      
-      <a href="mailto:agabaabel52@gmail.com" 
-         class="inline-block bg-white text-black px-10 py-5 rounded-full text-lg font-semibold hover:bg-cyan-400 hover:text-black transition">
-        📧 Email Me Now
-      </a>
-
-      <!-- Social Links -->
-      <div class="mt-12 flex justify-center gap-8 text-4xl">
-        <a href="https://github.com/Agaba52" target="_blank" class="hover:text-cyan-400 transition">🐙</a>
-        <a href="https://www.linkedin.com/in/agaba-abel-a46107212/" target="_blank" class="hover:text-cyan-400 transition">💼</a>
-        <a href="https://cybertalents.com/members/Agaba/profile" target="_blank" class="hover:text-cyan-400 transition">🔒</a>
-      </div>
-
-      <div class="mt-6 text-sm text-zinc-500">
-        GitHub • LinkedIn • CyberTalents
-      </div>
-    </div>
-  </section>
-
-  <!-- Typing Effect Script -->
   <script>
-    const texts = [
-      "Junior Cybersecurity Officer",
-      "CTF Enthusiast",
-      "Ethical Hacker in Training",
-      "Reverse Shell Builder"
-    ];
-    let count = 0;
-    let index = 0;
-    let currentText = "";
-    let letter = "";
-
-    const typedElement = document.getElementById("typed");
-
-    function type() {
-      if (index === texts[count].length) {
-        setTimeout(() => {
-          count = (count + 1) % texts.length;
-          index = 0;
-          type();
-        }, 2200);
-        return;
+    /* Fast-typist headline: bursts of letters with tiny human-like pauses */
+    (function () {
+      var el = document.getElementById('h1-text');
+      var full = [{t: "Hi, I'm "}, {t: "Agaba Abel", c: "name"}];
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.innerHTML = "Hi, I'm <span class='name'>Agaba Abel</span>"; return;
       }
-      currentText = texts[count];
-      letter = currentText.slice(0, ++index);
-      typedElement.textContent = letter;
-      setTimeout(type, 70);
-    }
+      var seg = 0, i = 0, cur = null;
+      function step() {
+        if (seg >= full.length) return;
+        if (i === 0) { cur = document.createElement('span'); if (full[seg].c) cur.className = full[seg].c; el.appendChild(cur); }
+        var ch = document.createElement('span'); ch.className = 'ch';
+        ch.textContent = full[seg].t[i]; cur.appendChild(ch); i++;
+        if (i >= full[seg].t.length) { seg++; i = 0; }
+        var ch0 = full[seg - (i === 0 ? 1 : 0)] ? ch.textContent : '';
+        setTimeout(step, ch0 === ',' || ch0 === ' ' ? 110 : 28 + Math.random() * 40);
+      }
+      setTimeout(step, 350);
+    })();
 
-    window.onload = () => {
-      type();
-    };
+    /* Dynamic SOC services list (cycles 3 at a time) */
+    (function () {
+      var services = [
+        ["24/7 alert monitoring", "& triage"],
+        ["SIEM deployment", "& tuning (Wazuh)"],
+        ["Phishing investigation", "& takedown advice"],
+        ["Incident response", "playbooks & escalation"],
+        ["Threat hunting", "& IOC enrichment"],
+        ["Vulnerability scanning", "& reporting"],
+        ["Endpoint agent rollout", "& log onboarding"],
+        ["Staff security", "awareness sessions"]
+      ];
+      var list = document.getElementById('svc-list'), dots = document.getElementById('svc-dots');
+      if (!list) return;
+      var PER = 3, page = 0, pages = Math.ceil(services.length / PER);
+      for (var p = 0; p < pages; p++) dots.appendChild(document.createElement('span'));
+      function render() {
+        list.innerHTML = '';
+        for (var k = 0; k < PER; k++) {
+          var s = services[(page * PER + k) % services.length];
+          var li = document.createElement('li');
+          li.style.animationDelay = (k * 0.18) + 's';
+          li.innerHTML = '<span><b>' + s[0] + '</b> ' + s[1] + '</span>';
+          list.appendChild(li);
+        }
+        Array.prototype.forEach.call(dots.children, function (d, n) { d.className = n === page ? 'on' : ''; });
+      }
+      function next() {
+        Array.prototype.forEach.call(list.children, function (li) { li.classList.add('out'); });
+        setTimeout(function () { page = (page + 1) % pages; render(); }, 380);
+      }
+      render(); setInterval(next, 3600);
+    })();
   </script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
