@@ -540,15 +540,17 @@
     /* Dynamic SOC services list (cycles 3 at a time) */
     (function () {
       var services = [
-        ["24/7 alert monitoring", "& triage"],
-        ["SIEM deployment", "& tuning (Wazuh)"],
-        ["Phishing investigation", "& takedown advice"],
-        ["Incident response", "playbooks & escalation"],
-        ["Threat hunting", "& IOC enrichment"],
-        ["Vulnerability scanning", "& reporting"],
-        ["Endpoint agent rollout", "& log onboarding"],
-        ["Staff security", "awareness sessions"]
-      ];
+  ["Mobile money fraud", "&  threat analysis"],
+  ["24/7 SOC alert monitoring", "& incident triage"],
+  ["SIEM deployment", "& tuning (Wazuh Lab)"],
+  ["Phishing simulation", "& social engineering defense"],
+  ["Incident response", "playbooks & crisis escalation"],
+  ["Threat hunting", "& IOC enrichment"],
+  ["Vulnerability assessment", "& remediation reporting"],
+  ["Firewall log review", "& rule optimization"],
+  ["Staff cybersecurity", "awareness & hygiene training"],
+  ["Compliance readiness", "( Data Protection Act)"]
+];
       var list = document.getElementById('svc-list'), dots = document.getElementById('svc-dots');
       if (!list) return;
       var PER = 3, page = 0, pages = Math.ceil(services.length / PER);
