@@ -21,43 +21,97 @@
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
-    /* ---------- Fast-typist headline ---------- */
+    /* ---------- Slow typist headline (~3s) ---------- */
     .type-h1{font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:-.03em;line-height:1.1;min-height:2.3em}
     .type-h1 .name{color:#22d3ee;text-shadow:0 0 18px rgba(34,211,238,.55)}
     .type-h1 .caret{display:inline-block;width:.55em;height:1em;margin-left:.08em;vertical-align:-.12em;background:#22d3ee;box-shadow:0 0 14px #22d3ee;animation:caret .7s steps(1) infinite}
-    .type-h1 .ch{animation:pop .12s ease-out both}
+    .type-h1 .ch{animation:pop .3s ease-out both}
     @keyframes caret{50%{opacity:0}}
-    @keyframes pop{from{opacity:0;transform:translateY(.25em) scale(1.25);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+    @keyframes pop{from{opacity:0;transform:translateY(.3em) scale(1.3);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
 
-    /* ---------- Services panel (replaces "AA") ---------- */
-    .svc-panel{position:relative;width:100%;height:100%;padding:1.1rem 1.1rem 1rem;display:flex;flex-direction:column;background:linear-gradient(160deg,rgba(9,9,11,.82),rgba(9,9,11,.94))}
-    .svc-panel .bar{display:flex;gap:6px;align-items:center;font:500 11px 'JetBrains Mono',monospace;color:#71717a;margin-bottom:.8rem}
-    .svc-panel .bar i{width:9px;height:9px;border-radius:50%;background:#3f3f46}
-    .svc-panel .bar i:first-child{background:#f87171}.svc-panel .bar i:nth-child(2){background:#fbbf24}.svc-panel .bar i:nth-child(3){background:#4ade80}
-    #svc-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem;flex:1;overflow:hidden}
-    #svc-list li{display:flex;gap:.55rem;align-items:flex-start;font-size:.8rem;line-height:1.3;color:#d4d4d8;animation:slideIn .45s cubic-bezier(.2,.8,.2,1) both}
-    #svc-list li::before{content:"";flex:none;width:7px;height:7px;margin-top:.35em;border-radius:50%;background:#22d3ee;box-shadow:0 0 8px #22d3ee}
-    #svc-list li.out{animation:slideOut .35s ease-in both}
-    #svc-list li b{color:#fff;font-weight:600}
-    @keyframes slideIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
-    @keyframes slideOut{to{opacity:0;transform:translateX(14px)}}
-    .svc-dots{display:flex;gap:5px;margin-top:.6rem}
-    .svc-dots span{height:3px;flex:1;border-radius:2px;background:#27272a;overflow:hidden}
-    .svc-dots span.on{background:#22d3ee}
+    /* ---------- Hero cursor spotlight ---------- */
+    .hero-spot{position:absolute;inset:0;pointer-events:none;background:radial-gradient(520px circle at var(--mx,70%) var(--my,30%),rgba(34,211,238,.10),transparent 60%)}
 
-    /* ---------- Phishing defense showcase ---------- */
-    .phish-card{position:relative;background:#0f0f12;border:1px solid #27272a;border-radius:1rem;padding:1.1rem;overflow:hidden;font-size:.85rem}
-    .phish-card .scan{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#22d3ee,transparent);box-shadow:0 0 16px 4px rgba(34,211,238,.45);animation:scan 6s linear infinite}
-    @keyframes scan{0%{top:0;opacity:0}8%{opacity:1}55%{top:100%;opacity:1}60%,100%{top:100%;opacity:0}}
-    .flag{display:inline-block;border-radius:.3rem;padding:0 .3rem;animation:flag 6s infinite both}
-    .flag.f1{animation-delay:0s}.flag.f2{animation-delay:.9s}.flag.f3{animation-delay:1.8s}.flag.f4{animation-delay:2.7s}
-    @keyframes flag{0%,12%{background:transparent;color:inherit}20%,88%{background:rgba(248,113,113,.2);color:#fca5a5;outline:1px solid rgba(248,113,113,.6)}100%{background:transparent}}
-    .stamp{position:absolute;right:1rem;bottom:1rem;border:3px solid #4ade80;color:#4ade80;font:800 1.3rem 'JetBrains Mono',monospace;padding:.15rem .7rem;border-radius:.4rem;transform:rotate(-10deg);animation:stamp 6s infinite both}
-    @keyframes stamp{0%,55%{opacity:0;transform:rotate(-10deg) scale(2.2)}62%,92%{opacity:1;transform:rotate(-10deg) scale(1)}100%{opacity:0}}
+    /* ---------- Services-to-offer panel ---------- */
+    .svc-shell{position:relative;width:min(21.5rem,88vw);border-radius:1.5rem;overflow:hidden;background:linear-gradient(160deg,rgba(18,18,22,.97),rgba(9,9,11,.99));border:1px solid rgba(34,211,238,.4);box-shadow:0 30px 80px -25px rgba(34,211,238,.35);transition:transform .2s ease-out;will-change:transform}
+    .svc-chrome{display:flex;gap:6px;align-items:center;padding:.65rem .9rem;font:500 11px 'JetBrains Mono',monospace;color:#71717a;border-bottom:1px solid #1f1f24}
+    .svc-chrome i{width:9px;height:9px;border-radius:50%;background:#3f3f46}
+    .svc-chrome i:nth-child(1){background:#f87171}.svc-chrome i:nth-child(2){background:#fbbf24}.svc-chrome i:nth-child(3){background:#4ade80}
+    .svc-bar{padding:.75rem .9rem .6rem}
+    .svc-bar-row{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+    .svc-bar-title{font:700 .85rem 'JetBrains Mono',monospace;color:#fff}
+    .svc-bar-title span{color:#22d3ee}
+    .svc-count{font:500 11px 'JetBrains Mono',monospace;color:#22d3ee}
+    .svc-track{height:3px;border-radius:2px;background:#27272a;margin-top:.55rem;overflow:hidden}
+    .svc-progress{height:100%;width:100%;background:linear-gradient(90deg,#0891b2,#22d3ee);box-shadow:0 0 10px #22d3ee;transform-origin:left;transform:scaleX(0)}
+    .svc-progress.run{animation:fill 6s linear forwards}
+    .svc-shell:hover .svc-progress.run{animation-play-state:paused}
+    @keyframes fill{to{transform:scaleX(1)}}
+    #svc-list{list-style:none;margin:0;padding:.2rem .8rem .8rem;display:flex;flex-direction:column;gap:.4rem;min-height:18.2rem}
+    #svc-list li{position:relative;overflow:hidden;display:grid;grid-template-columns:1.7rem 1fr;gap:.55rem;align-items:center;padding:.55rem .65rem;border-radius:.75rem;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);animation:svcIn .65s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+    #svc-list li::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(34,211,238,.28) 50%,transparent 70%);transform:translateX(-120%);animation:sweep 1s ease-out both;animation-delay:calc(var(--d,0s) + .25s)}
+    #svc-list li.out{animation:svcOut .5s cubic-bezier(.5,0,.9,.4) both;animation-delay:var(--o,0s)}
+    #svc-list li.out::after{display:none}
+    #svc-list .n{font:700 11px 'JetBrains Mono',monospace;color:#22d3ee;text-shadow:0 0 8px rgba(34,211,238,.7)}
+    #svc-list b{display:block;font-size:.8rem;color:#fff;font-weight:600;line-height:1.25}
+    #svc-list small{display:block;font-size:.7rem;color:#a1a1aa;line-height:1.3}
+    @keyframes svcIn{0%{opacity:0;transform:translateY(18px) scale(.95);filter:blur(7px);border-color:rgba(34,211,238,.9)}100%{opacity:1;transform:none;filter:none;border-color:rgba(255,255,255,.06)}}
+    @keyframes svcOut{to{opacity:0;transform:translateX(34px) scale(.92);filter:blur(7px)}}
+    @keyframes sweep{to{transform:translateX(120%)}}
+    .svc-cta{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.7rem .9rem;border-top:1px solid #1f1f24;background:rgba(34,211,238,.06)}
+    .svc-cta p{font-size:.72rem;line-height:1.3;color:#d4d4d8;display:flex;gap:.45rem;align-items:center}
+    .svc-cta p i{flex:none;width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:live 1.8s infinite}
+    @keyframes live{to{box-shadow:0 0 0 9px rgba(74,222,128,0)}}
+    .svc-cta a{flex:none;background:#22d3ee;color:#000;font-weight:700;font-size:.75rem;padding:.45rem .8rem;border-radius:.6rem}
+    .svc-cta a:hover{background:#67e8f9}
+
+    /* ---------- Realistic phishing email ---------- */
+    .mail{position:relative;border-radius:1rem;overflow:hidden;background:#fff;color:#202124;font-size:.8rem;box-shadow:0 30px 80px -25px rgba(34,211,238,.3),0 0 0 1px rgba(255,255,255,.06)}
+    .mail-top{display:flex;align-items:center;gap:.4rem;padding:.55rem .8rem;background:#f1f3f4;border-bottom:1px solid #e0e0e0;font-size:.68rem;color:#5f6368}
+    .mail-top i{width:9px;height:9px;border-radius:50%;background:#dadce0}
+    .mail-top span{margin-left:.5rem}
+    .mail-warn{display:flex;gap:.45rem;align-items:center;background:#fce8e6;color:#c5221f;padding:.45rem .8rem;font-weight:600;font-size:.7rem;border-bottom:1px solid #f5c6c2;animation:warn 10s infinite both}
+    @keyframes warn{0%,28%{opacity:0;transform:translateY(-6px)}34%,93%{opacity:1;transform:none}100%{opacity:0}}
+    .mail-head{display:flex;gap:.7rem;align-items:center;padding:.8rem .9rem .5rem}
+    .mail-av{flex:none;width:2.2rem;height:2.2rem;border-radius:50%;background:#0f9d58;color:#fff;display:grid;place-items:center;font-weight:700}
+    .mail-head b{display:block;font-size:.8rem}
+    .mail-head small{color:#5f6368;font-size:.7rem}
+    .mail-subj{padding:0 .9rem .6rem;font-size:.95rem;font-weight:600}
+    .mail-card{margin:0 .9rem .8rem;border:1px solid #e0e0e0;border-radius:.7rem;overflow:hidden}
+    .mail-band{background:linear-gradient(90deg,#0b6b3a,#16a34a);color:#fff;padding:.7rem .9rem;display:flex;align-items:center;gap:.6rem;font-weight:700}
+    .mail-band em{font-style:normal;width:1.7rem;height:1.7rem;border-radius:.45rem;background:#facc15;color:#14532d;display:grid;place-items:center;font-weight:900}
+    .mail-amt{padding:.8rem .9rem .3rem;text-align:center}
+    .mail-amt small{color:#5f6368}
+    .mail-amt strong{display:block;font-size:1.5rem;color:#0b6b3a;letter-spacing:-.02em}
+    .mail-txt{padding:.3rem .9rem .8rem;line-height:1.55;color:#3c4043}
+    .mail-btn{display:inline-block;margin:.2rem 0 .3rem;background:#16a34a;color:#fff;font-weight:700;padding:.55rem 1.1rem;border-radius:.5rem}
+    .mail-fine{padding:.5rem .9rem;background:#f8f9fa;border-top:1px solid #e0e0e0;font-size:.65rem;color:#80868b}
+    .flag{display:inline-block;border-radius:.25rem;padding:0 .25rem;outline:1px solid transparent}
+    .flag.f1{animation:fl1 10s infinite both}.flag.f2{animation:fl2 10s infinite both}.flag.f3{animation:fl3 10s infinite both}.flag.f4{animation:fl4 10s infinite both}.flag.f5{animation:fl5 10s infinite both}
+    @keyframes fl1{0%,8%{background:transparent;outline-color:transparent}12%,93%{background:rgba(239,68,68,.16);outline-color:rgba(239,68,68,.75)}100%{background:transparent;outline-color:transparent}}
+    @keyframes fl2{0%,13%{background:transparent;outline-color:transparent}17%,93%{background:rgba(239,68,68,.16);outline-color:rgba(239,68,68,.75)}100%{background:transparent;outline-color:transparent}}
+    @keyframes fl3{0%,18%{background:transparent;outline-color:transparent}22%,93%{background:rgba(239,68,68,.16);outline-color:rgba(239,68,68,.75)}100%{background:transparent;outline-color:transparent}}
+    @keyframes fl4{0%,23%{background:transparent;outline-color:transparent}27%,93%{background:rgba(239,68,68,.16);outline-color:rgba(239,68,68,.75)}100%{background:transparent;outline-color:transparent}}
+    @keyframes fl5{0%,28%{background:transparent;outline-color:transparent}32%,93%{background:rgba(239,68,68,.16);outline-color:rgba(239,68,68,.75)}100%{background:transparent;outline-color:transparent}}
+    .scan{position:absolute;left:0;right:0;height:2px;z-index:3;background:linear-gradient(90deg,transparent,#22d3ee,transparent);box-shadow:0 0 18px 5px rgba(34,211,238,.5);animation:scan 10s linear infinite}
+    @keyframes scan{0%{top:0;opacity:0}3%{opacity:1}34%{top:100%;opacity:1}37%,100%{top:100%;opacity:0}}
+    .triage{background:#0c0c0f;color:#d4d4d8;font:500 11px/1.5 'JetBrains Mono',monospace;padding:.7rem .9rem;border-top:2px solid #22d3ee}
+    .triage h4{color:#22d3ee;margin-bottom:.35rem;font-weight:700}
+    .triage div{display:flex;justify-content:space-between;gap:.5rem;padding:.12rem 0;opacity:0}
+    .triage div span:last-child{color:#f87171;font-weight:700;text-align:right}
+    .triage .t1{animation:r1 10s infinite both}.triage .t2{animation:r2 10s infinite both}.triage .t3{animation:r3 10s infinite both}.triage .t4{animation:r4 10s infinite both}.triage .t5{animation:r5 10s infinite both}
+    @keyframes r1{0%,38%{opacity:0;transform:translateX(-10px)}43%,93%{opacity:1;transform:none}100%{opacity:0}}
+    @keyframes r2{0%,44%{opacity:0;transform:translateX(-10px)}49%,93%{opacity:1;transform:none}100%{opacity:0}}
+    @keyframes r3{0%,50%{opacity:0;transform:translateX(-10px)}55%,93%{opacity:1;transform:none}100%{opacity:0}}
+    @keyframes r4{0%,56%{opacity:0;transform:translateX(-10px)}61%,93%{opacity:1;transform:none}100%{opacity:0}}
+    @keyframes r5{0%,64%{opacity:0;transform:translateX(-10px)}69%,93%{opacity:1;transform:none}100%{opacity:0}}
+    .triage .t5 span:last-child{color:#4ade80}
+    .stamp{position:absolute;z-index:4;right:7%;top:36%;border:3px solid #16a34a;color:#16a34a;background:rgba(255,255,255,.88);font:800 1.5rem 'JetBrains Mono',monospace;padding:.15rem .8rem;border-radius:.4rem;transform:rotate(-10deg);animation:stamp 10s infinite both}
+    @keyframes stamp{0%,66%{opacity:0;transform:rotate(-10deg) scale(2.4)}72%,93%{opacity:1;transform:rotate(-10deg) scale(1)}100%{opacity:0}}
     .pulse-ring{animation:ring 2s ease-out infinite}
     @keyframes ring{0%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}100%{box-shadow:0 0 0 18px rgba(34,211,238,0)}}
 
-    /* ---------- Moving-picture tiles (story) ---------- */
+    /* ---------- Moving-picture tiles ---------- */
     .motion-tile{position:relative;aspect-ratio:4/3;border-radius:.9rem;overflow:hidden;background:#0c0c0f;border:1px solid #27272a}
     .motion-tile svg,.motion-tile img.gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
     .motion-tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:.4rem .6rem;font:500 11px 'JetBrains Mono',monospace;color:#a1a1aa;background:linear-gradient(transparent,rgba(0,0,0,.85))}
@@ -72,9 +126,136 @@
     .m-flow{stroke-dasharray:6 8;animation:flow 1s linear infinite}
     @keyframes flow{to{stroke-dashoffset:-14}}
 
+    /* ---------- Timeline badges ---------- */
+    .tl-badge{display:inline-block;font:700 10px 'JetBrains Mono',monospace;letter-spacing:.04em;padding:.15rem .5rem;border-radius:999px;border:1px solid rgba(34,211,238,.4);color:#22d3ee;background:rgba(34,211,238,.08)}
+
     .link-logo{width:1.25rem;height:1.25rem;object-fit:contain}
-    @media (prefers-reduced-motion:reduce){.motion-tile *,.phish-card *,#svc-list li{animation:none!important}}
+    @media (prefers-reduced-motion:reduce){.motion-tile *,.mail *,.scan,.stamp,#svc-list li,.svc-cta i{animation:none!important}.triage div,.mail-warn{opacity:1!important}}
   </style>
+
+<style id="agaba-responsive-live">
+/* =========================================================
+   AGABA.SEC — additive mobile + live-evidence improvements
+   Existing design/content is intentionally preserved.
+   ========================================================= */
+html, body { overflow-x: hidden; }
+img, svg, video, iframe { max-width: 100%; }
+a, button { -webkit-tap-highlight-color: transparent; }
+
+@media (max-width: 767px) {
+  #home { min-height: auto; }
+  #home > .relative.max-w-6xl { gap: 2rem; }
+  .type-h1 { font-size: clamp(2rem, 10vw, 3.4rem); min-height: 2.45em; }
+  .svc-shell {
+    width: min(21.5rem, calc(100vw - 2rem));
+    max-width: 100%;
+  }
+  #svc-list { min-height: 0; }
+  .svc-cta { flex-wrap: wrap; }
+  .svc-cta p { min-width: 0; }
+  .mail { width: 100%; }
+  .mail-subj { font-size: .88rem; }
+  .mail-amt strong { font-size: 1.25rem; }
+  .stamp { font-size: 1rem; border-width: 2px; right: 5%; }
+  .motion-tile { min-width: 0; }
+  #experience .relative.border-l {
+    margin-left: .75rem;
+  }
+  #experience .relative.border-l > li {
+    margin-left: 1.25rem;
+  }
+  #experience .relative.border-l > li > span {
+    left: -2.35rem;
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+  #experience .relative.border-l > li > span img {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+  #experience .relative.border-l > li > div {
+    padding: 1rem;
+  }
+  .ag-live-grid { grid-template-columns: 1fr !important; }
+  .ag-live-card { min-width: 0; }
+  .ag-live-card .ag-live-value { font-size: 1.65rem; }
+  .ag-live-actions a { width: 100%; justify-content: center; }
+}
+
+@media (min-width: 768px) {
+  .ag-live-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .ag-live-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.ag-live-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(24,24,27,.78);
+  border: 1px solid rgba(63,63,70,.9);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.ag-live-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(34,211,238,.55);
+  box-shadow: 0 18px 45px -25px rgba(34,211,238,.35);
+}
+.ag-live-top { display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
+.ag-live-brand { display:flex; align-items:center; gap:.7rem; min-width:0; }
+.ag-live-brand img { width:1.9rem; height:1.9rem; object-fit:contain; flex:none; }
+.ag-live-brand h3 { font-size:.98rem; font-weight:700; }
+.ag-live-badge {
+  display:inline-flex; align-items:center; gap:.35rem;
+  font:700 .65rem 'JetBrains Mono',monospace;
+  color:#4ade80; text-transform:uppercase; letter-spacing:.05em;
+}
+.ag-live-badge::before {
+  content:""; width:.42rem; height:.42rem; border-radius:50%;
+  background:#4ade80; box-shadow:0 0 9px rgba(74,222,128,.8);
+}
+.ag-live-value {
+  margin-top:1rem;
+  font:800 2rem/1.1 'JetBrains Mono',monospace;
+  color:#22d3ee;
+}
+.ag-live-label { color:#a1a1aa; font-size:.78rem; margin-top:.25rem; }
+.ag-live-meta {
+  margin-top:.9rem; padding-top:.75rem;
+  border-top:1px solid rgba(63,63,70,.65);
+  color:#71717a; font:500 .68rem/1.45 'JetBrains Mono',monospace;
+}
+.ag-live-actions { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem; }
+.ag-live-actions a {
+  display:inline-flex; align-items:center; gap:.35rem;
+  border:1px solid #3f3f46; border-radius:.55rem;
+  padding:.45rem .65rem; color:#d4d4d8; font-size:.72rem;
+}
+.ag-live-actions a:hover { border-color:#22d3ee; color:#22d3ee; }
+.ag-live-status { color:#fbbf24; }
+.ag-live-status.ok { color:#4ade80; }
+.ag-live-status.err { color:#f87171; }
+.ag-live-note {
+  max-width:48rem; margin:0 auto 1.75rem;
+  color:#71717a; font:500 .72rem/1.55 'JetBrains Mono',monospace;
+  text-align:center;
+}
+.ag-live-feed {
+  margin-top:1rem; display:flex; flex-direction:column; gap:.45rem;
+}
+.ag-live-feed a {
+  display:block; padding:.6rem .7rem; border-radius:.6rem;
+  background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.05);
+}
+.ag-live-feed a:hover { border-color:rgba(34,211,238,.4); }
+.ag-live-feed strong { display:block; color:#e4e4e7; font-size:.75rem; }
+.ag-live-feed small { color:#71717a; font-size:.64rem; }
+.ag-live-loading { color:#71717a; font:500 .7rem 'JetBrains Mono',monospace; }
+</style>
+
 </head>
 
 <body class="bg-zinc-950 text-slate-100 font-sans antialiased selection:bg-cyan-400 selection:text-black">
@@ -116,6 +297,7 @@
     <!-- ===================== HERO ===================== -->
     <section id="home" class="relative min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 overflow-hidden">
       <div class="hero-grid absolute inset-0 pointer-events-none"></div>
+      <div class="hero-spot" id="hero-spot"></div>
       <div class="absolute -top-32 -right-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute bottom-0 -left-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -127,7 +309,6 @@
             Kampala, Uganda • Open to Global &amp; Remote Roles
           </div>
 
-          <!-- Fast-typist headline (script at bottom) -->
           <h1 id="hero-title" class="type-h1 text-4xl sm:text-6xl mb-4" aria-label="Hi, I'm Agaba Abel">
             <span id="h1-text" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span>
           </h1>
@@ -162,58 +343,118 @@
           </div>
         </div>
 
-        <!-- Services panel: photo (images/profile.jpg) stays as a dim backdrop if present -->
+        <!-- Services to offer: 5 shown at a time, rotating -->
         <div class="md:col-span-2 flex justify-center reveal">
           <div class="relative">
-            <div class="absolute -inset-1 bg-gradient-to-tr from-cyan-400 to-cyan-700 rounded-3xl blur opacity-40"></div>
-            <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl overflow-hidden border border-cyan-500/40 bg-zinc-900">
-              <img src="images/profile.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30" onerror="this.remove()">
-              <div class="svc-panel">
-                <div class="bar"><i></i><i></i><i></i><span class="ml-2">soc-services.sh</span></div>
-                <ul id="svc-list" aria-live="polite"></ul>
-                <div class="svc-dots" id="svc-dots"></div>
+            <div class="absolute -inset-1 bg-gradient-to-tr from-cyan-400 to-cyan-700 rounded-3xl blur opacity-30"></div>
+            <div class="svc-shell" id="svc-shell">
+              <div class="svc-chrome"><i></i><i></i><i></i><span class="ml-2">soc-services.sh</span></div>
+              <div class="svc-bar">
+                <div class="svc-bar-row">
+                  <p class="svc-bar-title">Services <span>I offer</span></p>
+                  <p class="svc-count" id="svc-count">01–05 / 15</p>
+                </div>
+                <div class="svc-track"><div class="svc-progress" id="svc-progress"></div></div>
+              </div>
+              <ul id="svc-list" aria-live="polite"></ul>
+              <div class="svc-cta">
+                <p><i></i>On demand — ready to join your IT team</p>
+                <a href="#contact">Hire me</a>
               </div>
             </div>
-            <div class="absolute -bottom-4 -left-4 bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2 text-xs font-mono shadow-xl">
-              <span class="text-cyan-400">services</span> = <span class="text-green-400">"SOC for your team"</span>
+            <div class="absolute -bottom-4 -left-4 bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2 text-xs font-mono shadow-xl z-10">
+              <span class="text-cyan-400">services</span> = <span class="text-green-400">"to offer to you"</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== PHISHING DEFENSE (eye-catcher) ===================== -->
+    <!-- ===================== PHISHING DEFENSE ===================== -->
     <section id="phishing" class="py-16 sm:py-20 border-y border-red-500/20 bg-gradient-to-b from-red-950/20 to-zinc-950">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="grid md:grid-cols-2 gap-10 items-start">
 
-        <div class="reveal">
-          <p class="text-red-400 font-mono text-sm mb-2">// threat #1 in Uganda</p>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-4">Phishing is where most attacks start. I stop it.</h2>
-          <p class="text-zinc-400 mb-6">Fake mobile-money alerts, spoofed bank mails, fraudulent job offers and cloned login pages hit Ugandan organisations daily. I investigate the message, trace the infrastructure and give your team a clear verdict and a fix.</p>
-          <ul class="grid sm:grid-cols-2 gap-3 text-sm text-zinc-300">
-            <li class="flex gap-2"><span class="text-cyan-400">▸</span>Email header &amp; sender spoofing analysis</li>
-            <li class="flex gap-2"><span class="text-cyan-400">▸</span>URL, domain &amp; attachment inspection</li>
-            <li class="flex gap-2"><span class="text-cyan-400">▸</span>Spearphishing payload investigation</li>
-            <li class="flex gap-2"><span class="text-cyan-400">▸</span>Staff awareness &amp; reporting playbooks</li>
-          </ul>
-          <a href="#contact" class="inline-block mt-7 bg-cyan-400 text-black px-6 py-3 rounded-xl font-bold hover:bg-cyan-300 transition pulse-ring">Report a suspicious message</a>
+          <div class="reveal md:pt-6">
+            <p class="text-red-400 font-mono text-sm mb-2">// threat #1 in Uganda</p>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4">Phishing is where most attacks start. I stop it.</h2>
+            <p class="text-zinc-400 mb-6">Fake mobile-money alerts, spoofed bank mails, fraudulent job offers and cloned login pages hit Ugandan organisations daily. I investigate the message, trace the infrastructure and give your team a clear verdict and a fix.</p>
+            <p class="text-zinc-300 mb-6 text-sm">Watch the email on the right. It looks real, and that is the point. In under a minute, the triage flags the spoofed sender, the fake deadline, the shortened link and the secrecy request.</p>
+            <ul class="grid sm:grid-cols-2 gap-3 text-sm text-zinc-300">
+              <li class="flex gap-2"><span class="text-cyan-400">▸</span>Email header &amp; sender spoofing analysis</li>
+              <li class="flex gap-2"><span class="text-cyan-400">▸</span>URL, domain &amp; attachment inspection</li>
+              <li class="flex gap-2"><span class="text-cyan-400">▸</span>Spearphishing payload investigation</li>
+              <li class="flex gap-2"><span class="text-cyan-400">▸</span>Staff awareness &amp; reporting playbooks</li>
+            </ul>
+            <div class="flex flex-wrap gap-3 mt-7">
+              <a href="#contact" class="inline-block bg-cyan-400 text-black px-6 py-3 rounded-xl font-bold hover:bg-cyan-300 transition pulse-ring">Hire me for your SOC</a>
+              <a href="mailto:agabaabel52@gmail.com?subject=Suspicious%20message%20to%20analyse" class="inline-block border border-zinc-700 px-6 py-3 rounded-xl font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">Report a suspicious message</a>
+            </div>
+          </div>
+
+          <!-- Realistic email + live triage -->
+          <div class="mail reveal" role="img" aria-label="Animation of a realistic phishing email being analysed: spoofed sender, fake urgency, short link and secrecy request are flagged, then the message is blocked">
+            <div class="scan"></div>
+            <div class="mail-top"><i></i><i></i><i></i><span>Inbox — 1 new message</span></div>
+            <div class="mail-warn"><span>⚠</span> Agaba's triage: this message is likely a scam. Do not click anything.</div>
+            <div class="mail-head">
+              <div class="mail-av">M</div>
+              <div>
+                <b>Mobile Money Support</b>
+                <small>&lt;<span class="flag f1">support@mobi1e-money-ug.com</span>&gt; · to me · 09:14</small>
+              </div>
+            </div>
+            <p class="mail-subj">Mobile Money received: UGX 2,500,000</p>
+            <div class="mail-card">
+              <div class="mail-band"><em>M</em> Mobile Money · Transaction alert</div>
+              <div class="mail-amt"><small>You have received</small><strong>UGX 2,500,000</strong></div>
+              <p class="mail-txt">
+                Dear customer, a deposit is waiting on your wallet. <span class="flag f2">Your account will be suspended in 30 minutes</span> unless you confirm your PIN.<br>
+                <a class="mail-btn flag f3" href="#phishing" onclick="return false">Confirm PIN now</a><br>
+                <span class="flag f4">http://bit.ly/claim-ugx</span><br>
+                <span class="flag f5">Please do not tell anyone about this message.</span>
+              </p>
+              <div class="mail-fine">© Mobile Money Uganda Ltd · Kampala · Reference 8A91-77XC</div>
+            </div>
+            <div class="triage">
+              <h4>$ triage --verdict</h4>
+              <div class="t1"><span>sender domain (2 days old)</span><span>SPOOFED</span></div>
+              <div class="t2"><span>SPF / DKIM</span><span>FAIL</span></div>
+              <div class="t3"><span>urgency: 30-minute deadline</span><span>PRESSURE</span></div>
+              <div class="t4"><span>short link to credential page</span><span>MALICIOUS</span></div>
+              <div class="t5"><span>action: blocked, staff alerted</span><span>SAFE</span></div>
+            </div>
+            <div class="stamp">BLOCKED</div>
+          </div>
         </div>
 
-        <!-- Animated live analysis -->
-        <div class="phish-card reveal" role="img" aria-label="Animation of a phishing message being analysed and blocked">
-          <div class="scan"></div>
-          <p class="font-mono text-xs text-zinc-500 mb-3">phishing-triage — incoming message</p>
-          <p class="mb-1"><span class="text-zinc-500">From:</span> <span class="flag f1">support@mobi1e-money-ug.com</span></p>
-          <p class="mb-3"><span class="text-zinc-500">Subject:</span> Mobile Money received UGX 2,500,000</p>
-          <p class="text-zinc-300 leading-relaxed mb-5">Dear customer, <span class="flag f2">your account will be suspended in 30 minutes</span>. Confirm your PIN now: <span class="flag f3">http://bit.ly/claim-ugx</span><br><span class="flag f4">Do not tell anyone.</span></p>
-          <div class="grid grid-cols-4 gap-2 text-center text-[10px] font-mono text-zinc-400">
-            <span class="border border-zinc-800 rounded py-1">spoofed domain</span>
-            <span class="border border-zinc-800 rounded py-1">fake urgency</span>
-            <span class="border border-zinc-800 rounded py-1">short link</span>
-            <span class="border border-zinc-800 rounded py-1">secrecy ask</span>
+        <!-- Moving pictures: shown right where phishing is triggered -->
+        <div class="mt-14">
+          <p class="text-cyan-400 font-mono text-sm text-center mb-2 reveal">// live action</p>
+          <h3 class="text-xl sm:text-2xl font-bold text-center mb-6 reveal">From the first click to a defended network</h3>
+          <!-- To use real GIFs, drop files in images/gifs/ (phishing.gif, radar.gif, terminal.gif, network.gif) -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+            <figure class="motion-tile">
+              <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><line x1="100" y1="0" x2="100" y2="50" stroke="#52525b"/><g class="m-hook"><path d="M100 50v30a14 14 0 1 1-14-14" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/><rect x="70" y="100" width="60" height="38" rx="5" fill="#18181b" stroke="#f87171"/><path d="M72 104l28 18 28-18" fill="none" stroke="#f87171" stroke-width="2"/></g></svg>
+              <img class="gif" src="images/gifs/phishing.gif" alt="" onerror="this.remove()">
+              <figcaption>1 · phishing caught</figcaption>
+            </figure>
+            <figure class="motion-tile">
+              <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g fill="none" stroke="#164e63"><circle cx="100" cy="75" r="20"/><circle cx="100" cy="75" r="40"/><circle cx="100" cy="75" r="60"/></g><g class="m-radar"><path d="M100 75L100 15A60 60 0 0 1 152 45Z" fill="rgba(34,211,238,.35)"/></g><circle class="m-blink" cx="130" cy="50" r="4" fill="#f87171"/><circle class="m-blink d2" cx="70" cy="100" r="4" fill="#f87171"/><circle class="m-blink d3" cx="118" cy="105" r="4" fill="#fbbf24"/></svg>
+              <img class="gif" src="images/gifs/radar.gif" alt="" onerror="this.remove()">
+              <figcaption>2 · threat hunting</figcaption>
+            </figure>
+            <figure class="motion-tile">
+              <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g font-family="monospace" font-size="9" fill="#4ade80"><g class="m-log"><text x="8" y="16">[wazuh] agent 003 connected</text><text x="8" y="32" fill="#fbbf24">[rule 5710] ssh brute force</text><text x="8" y="48">[wazuh] fim: /etc/passwd ok</text><text x="8" y="64" fill="#f87171">[rule 87105] malware hash</text><text x="8" y="80">[wazuh] agent 004 connected</text><text x="8" y="96" fill="#fbbf24">[rule 31101] web 400 burst</text><text x="8" y="112">[wazuh] alert triaged</text><text x="8" y="128" fill="#f87171">[rule 100002] phish url</text><text x="8" y="144">[wazuh] agent 003 connected</text><text x="8" y="160" fill="#fbbf24">[rule 5710] ssh brute force</text><text x="8" y="176">[wazuh] fim: /etc/passwd ok</text><text x="8" y="192" fill="#f87171">[rule 87105] malware hash</text><text x="8" y="208">[wazuh] agent 004 connected</text><text x="8" y="224" fill="#fbbf24">[rule 31101] web 400 burst</text><text x="8" y="240">[wazuh] alert triaged</text><text x="8" y="256" fill="#f87171">[rule 100002] phish url</text></g></g></svg>
+              <img class="gif" src="images/gifs/terminal.gif" alt="" onerror="this.remove()">
+              <figcaption>3 · SIEM alerts</figcaption>
+            </figure>
+            <figure class="motion-tile">
+              <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g class="m-flow" stroke="#22d3ee" stroke-width="2" fill="none"><path d="M40 40L100 75"/><path d="M40 110L100 75"/><path d="M160 40L100 75"/><path d="M160 110L100 75"/></g><g fill="#18181b" stroke="#22d3ee"><circle cx="40" cy="40" r="10"/><circle cx="40" cy="110" r="10"/><circle cx="160" cy="40" r="10"/><circle cx="160" cy="110" r="10"/></g><path d="M100 55l18 8v14c0 10-8 17-18 21-10-4-18-11-18-21V63z" fill="#164e63" stroke="#22d3ee" stroke-width="2"/></svg>
+              <img class="gif" src="images/gifs/network.gif" alt="" onerror="this.remove()">
+              <figcaption>4 · defended network</figcaption>
+            </figure>
           </div>
-          <div class="h-12"></div>
-          <div class="stamp">BLOCKED</div>
         </div>
       </div>
     </section>
@@ -236,30 +477,6 @@
         <p class="text-cyan-400 font-mono text-sm text-center mb-2">// about me</p>
         <h2 class="text-3xl sm:text-4xl font-bold text-center mb-10">My Story</h2>
 
-        <!-- Moving pictures. To use real GIFs, drop files in images/gifs/ (phishing.gif, radar.gif, terminal.gif, network.gif) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 reveal">
-          <figure class="motion-tile">
-            <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><line x1="100" y1="0" x2="100" y2="50" stroke="#52525b"/><g class="m-hook"><path d="M100 50v30a14 14 0 1 1-14-14" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/><rect x="70" y="100" width="60" height="38" rx="5" fill="#18181b" stroke="#f87171"/><path d="M72 104l28 18 28-18" fill="none" stroke="#f87171" stroke-width="2"/></g></svg>
-            <img class="gif" src="images/gifs/phishing.gif" alt="" onerror="this.remove()">
-            <figcaption>phishing caught</figcaption>
-          </figure>
-          <figure class="motion-tile">
-            <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g fill="none" stroke="#164e63"><circle cx="100" cy="75" r="20"/><circle cx="100" cy="75" r="40"/><circle cx="100" cy="75" r="60"/></g><g class="m-radar"><path d="M100 75L100 15A60 60 0 0 1 152 45Z" fill="rgba(34,211,238,.35)"/></g><circle class="m-blink" cx="130" cy="50" r="4" fill="#f87171"/><circle class="m-blink d2" cx="70" cy="100" r="4" fill="#f87171"/><circle class="m-blink d3" cx="118" cy="105" r="4" fill="#fbbf24"/></svg>
-            <img class="gif" src="images/gifs/radar.gif" alt="" onerror="this.remove()">
-            <figcaption>threat hunting</figcaption>
-          </figure>
-          <figure class="motion-tile">
-            <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g font-family="monospace" font-size="9" fill="#4ade80"><g class="m-log"><text x="8" y="16">[wazuh] agent 003 connected</text><text x="8" y="32" fill="#fbbf24">[rule 5710] ssh brute force</text><text x="8" y="48">[wazuh] fim: /etc/passwd ok</text><text x="8" y="64" fill="#f87171">[rule 87105] malware hash</text><text x="8" y="80">[wazuh] agent 004 connected</text><text x="8" y="96" fill="#fbbf24">[rule 31101] web 400 burst</text><text x="8" y="112">[wazuh] alert triaged</text><text x="8" y="128" fill="#f87171">[rule 100002] phish url</text><text x="8" y="144">[wazuh] agent 003 connected</text><text x="8" y="160" fill="#fbbf24">[rule 5710] ssh brute force</text><text x="8" y="176">[wazuh] fim: /etc/passwd ok</text><text x="8" y="192" fill="#f87171">[rule 87105] malware hash</text><text x="8" y="208">[wazuh] agent 004 connected</text><text x="8" y="224" fill="#fbbf24">[rule 31101] web 400 burst</text><text x="8" y="240">[wazuh] alert triaged</text><text x="8" y="256" fill="#f87171">[rule 100002] phish url</text></g></g></svg>
-            <img class="gif" src="images/gifs/terminal.gif" alt="" onerror="this.remove()">
-            <figcaption>SIEM alerts</figcaption>
-          </figure>
-          <figure class="motion-tile">
-            <svg viewBox="0 0 200 150" aria-hidden="true"><rect width="200" height="150" fill="#0c0c0f"/><g class="m-flow" stroke="#22d3ee" stroke-width="2" fill="none"><path d="M40 40L100 75"/><path d="M40 110L100 75"/><path d="M160 40L100 75"/><path d="M160 110L100 75"/></g><g fill="#18181b" stroke="#22d3ee"><circle cx="40" cy="40" r="10"/><circle cx="40" cy="110" r="10"/><circle cx="160" cy="40" r="10"/><circle cx="160" cy="110" r="10"/></g><path d="M100 55l18 8v14c0 10-8 17-18 21-10-4-18-11-18-21V63z" fill="#164e63" stroke="#22d3ee" stroke-width="2"/></svg>
-            <img class="gif" src="images/gifs/network.gif" alt="" onerror="this.remove()">
-            <figcaption>defended network</figcaption>
-          </figure>
-        </div>
-
         <div class="bg-zinc-900/80 border border-zinc-800 p-6 sm:p-10 rounded-2xl shadow-xl space-y-6 text-zinc-300 leading-relaxed text-base sm:text-lg font-light reveal max-w-4xl mx-auto">
           <p>
             As a <strong class="text-white font-semibold">Volunteer IT Support Technician at the National Identification and Registration Authority (NIRA) Uganda</strong>, I contributed directly to the Mass Renewal Project in my home district by installing software that improved biometric accuracy and helping resolve critical system errors. This field experience gave me practical exposure to managing private networks, supporting internal infrastructure, and enforcing data security compliance under real-world pressure.
@@ -272,7 +489,6 @@
           </p>
         </div>
 
-        <!-- Contact line -->
         <div class="flex flex-wrap items-center justify-center gap-3 mt-8 reveal">
           <a href="mailto:agabaabel52@gmail.com" class="logo-chip px-3 gap-2 inline-flex items-center text-sm"><img src="https://www.google.com/s2/favicons?domain=gmail.com&sz=64" alt="" class="link-logo"> Email</a>
           <a href="https://www.linkedin.com/in/agaba-abel-a46107212/" target="_blank" rel="noopener" class="logo-chip px-3 gap-2 inline-flex items-center text-sm"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" alt="" class="link-logo"> LinkedIn</a>
@@ -289,13 +505,14 @@
         <p class="text-cyan-400 font-mono text-sm text-center mb-2">// experience &amp; education</p>
         <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Where I've Worked &amp; Studied</h2>
 
-        <ol class="relative border-l border-zinc-800 ml-3 space-y-10">
-
-          <li class="ml-8 reveal">
-            <span class="absolute -left-[22px] flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden">
+        <h3 class="ml-3 mb-6 text-sm font-mono text-zinc-500">// work</h3>
+        <ol class="relative border-l border-zinc-800 ml-3 space-y-10 mb-14">
+          <li class="relative ml-8 reveal">
+            <span class="absolute -left-[54px] top-0 flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden text-black font-bold">
               <img src="https://www.google.com/s2/favicons?domain=nira.go.ug&sz=128" alt="NIRA Uganda logo" class="w-8 h-8 object-contain" loading="lazy" onerror="this.replaceWith(document.createTextNode('N'))">
             </span>
             <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
+              <span class="tl-badge mb-2">WORK · VOLUNTEER</span>
               <h3 class="text-lg sm:text-xl font-semibold">Volunteer IT Support Technician</h3>
               <p class="text-cyan-400 text-sm font-medium mb-3">National Identification and Registration Authority (NIRA) Uganda</p>
               <ul class="space-y-2 text-zinc-400 text-sm sm:text-base list-disc list-inside marker:text-cyan-400">
@@ -306,22 +523,81 @@
               </ul>
             </div>
           </li>
+        </ol>
 
-          <li class="ml-8 reveal">
-            <span class="absolute -left-[22px] flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden">
+        <h3 class="ml-3 mb-6 text-sm font-mono text-zinc-500">// education &amp; training</h3>
+        <ol class="relative border-l border-zinc-800 ml-3 space-y-10">
+
+          <li class="relative ml-8 reveal">
+            <span class="absolute -left-[54px] top-0 flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden text-black font-bold">
               <img src="images/amity-logo.png" alt="Amity University logo" class="w-9 h-9 object-contain" onerror="this.onerror=function(){this.replaceWith(document.createTextNode('A'))};this.src='https://www.google.com/s2/favicons?domain=amity.edu&sz=128'">
             </span>
             <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
-              <div class="flex items-center gap-4 mb-3">
-                <span class="flex-none w-14 h-14 rounded-xl bg-white flex items-center justify-center p-1.5">
-                  <img src="images/amity-logo.png" alt="Amity University logo" class="max-w-full max-h-full object-contain" onerror="this.onerror=function(){this.parentElement.remove()};this.src='https://www.google.com/s2/favicons?domain=amity.edu&sz=128'">
-                </span>
-                <div>
-                  <h3 class="text-lg sm:text-xl font-semibold">Bachelor of Computer Applications — First Class</h3>
-                  <p class="text-cyan-400 text-sm font-medium">Amity University</p>
-                </div>
-              </div>
+              <span class="tl-badge mb-2">DEGREE</span>
+              <h3 class="text-lg sm:text-xl font-semibold">Bachelor of Computer Applications — First Class</h3>
+              <p class="text-cyan-400 text-sm font-medium mb-2">Amity University</p>
               <p class="text-zinc-400 text-sm sm:text-base">Built the computing fundamentals behind my security, programming and systems work.</p>
+            </div>
+          </li>
+
+          <li class="relative ml-8 reveal">
+            <span class="absolute -left-[54px] top-0 flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden text-black font-bold">
+              <img src="https://www.google.com/s2/favicons?domain=alxafrica.com&sz=128" alt="ALX logo" class="w-8 h-8 object-contain" loading="lazy" onerror="this.replaceWith(document.createTextNode('ALX'))">
+            </span>
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
+              <span class="tl-badge mb-2">TRAINING</span>
+              <h3 class="text-lg sm:text-xl font-semibold">ALX Software Engineering</h3>
+              <p class="text-cyan-400 text-sm font-medium mb-2">ALX Africa</p>
+              <p class="text-zinc-400 text-sm sm:text-base">Software engineering training: programming fundamentals, Linux and backend development, tested through hands-on assessments.</p>
+            </div>
+          </li>
+
+          <li class="relative ml-8 reveal">
+            <span class="absolute -left-[54px] top-0 flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden text-black font-bold">
+              <img src="https://www.google.com/s2/favicons?domain=tryhackme.com&sz=128" alt="TryHackMe logo" class="w-8 h-8 object-contain" loading="lazy" onerror="this.replaceWith(document.createTextNode('T'))">
+            </span>
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
+              <span class="tl-badge mb-2">CERTIFICATION · LABS</span>
+              <h3 class="text-lg sm:text-xl font-semibold">TryHackMe — SOC Level 1 &amp; Penetration Testing</h3>
+              <p class="text-cyan-400 text-sm font-medium mb-2">TryHackMe</p>
+              <p class="text-zinc-400 text-sm sm:text-base">Earned SOC Level 1 and keep solving penetration-testing rooms: enumeration, exploitation and alert investigation.</p>
+            </div>
+          </li>
+
+          <li class="relative ml-8 reveal">
+            <span class="absolute -left-[54px] top-0 flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden text-black font-bold">
+              <img src="https://www.google.com/s2/favicons?domain=cybertalents.com&sz=128" alt="CyberTalents logo" class="w-8 h-8 object-contain" loading="lazy" onerror="this.replaceWith(document.createTextNode('C'))">
+            </span>
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
+              <span class="tl-badge mb-2">CHALLENGES</span>
+              <h3 class="text-lg sm:text-xl font-semibold">CyberTalents</h3>
+              <p class="text-cyan-400 text-sm font-medium mb-2">CyberTalents platform</p>
+              <p class="text-zinc-400 text-sm sm:text-base">Many rooms and challenges completed across security categories.</p>
+            </div>
+          </li>
+
+          <li class="relative ml-8 reveal">
+            <span class="absolute -left-[54px] top-0 flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden text-black font-bold">
+              <img src="https://www.google.com/s2/favicons?domain=coursera.org&sz=128" alt="Coursera logo" class="w-8 h-8 object-contain" loading="lazy" onerror="this.replaceWith(document.createTextNode('C'))">
+            </span>
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
+              <span class="tl-badge mb-2">CERTIFICATION</span>
+              <h3 class="text-lg sm:text-xl font-semibold">Google Cybersecurity Certificate</h3>
+              <p class="text-cyan-400 text-sm font-medium mb-2">Coursera</p>
+              <p class="text-zinc-400 text-sm sm:text-base mb-3">Security principles, frameworks such as NIST, and operational threat defense.</p>
+              <a href="https://www.coursera.org/account/accomplishments/verify/TTGQWX0JTA2J" target="_blank" rel="noopener" class="text-sm font-semibold text-cyan-400 hover:underline">Verify on Coursera &rarr;</a>
+            </div>
+          </li>
+
+          <li class="relative ml-8 reveal">
+            <span class="absolute -left-[54px] top-0 flex items-center justify-center w-11 h-11 rounded-full bg-white ring-4 ring-zinc-950 overflow-hidden text-black font-bold">
+              <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=128" alt="YouTube logo" class="w-8 h-8 object-contain" loading="lazy" onerror="this.replaceWith(document.createTextNode('Y'))">
+            </span>
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 card-hover">
+              <span class="tl-badge mb-2">SELF-TAUGHT</span>
+              <h3 class="text-lg sm:text-xl font-semibold">Self-taught on YouTube</h3>
+              <p class="text-cyan-400 text-sm font-medium mb-2">Daily, hands-on learning</p>
+              <p class="text-zinc-400 text-sm sm:text-base">Learned networking, SIEM, Python and security tooling from video tutorials, then rebuilt each lesson in my own lab.</p>
             </div>
           </li>
 
@@ -451,6 +727,153 @@
       </div>
     </section>
 
+
+    <!-- ===================== LIVE / VERIFIED ACTIVITY ===================== -->
+    <section id="live-evidence" class="py-20 sm:py-24 border-y border-zinc-800/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-cyan-400 font-mono text-sm text-center mb-2">// live evidence</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4">Real Profiles &amp; Activity</h2>
+        <p class="ag-live-note">
+          Public/API-backed information is loaded when the platform permits it. No fabricated scores, certificates,
+          activity counts or “live logs” are generated by this portfolio.
+        </p>
+
+        <div class="ag-live-grid grid gap-6">
+
+          <article class="ag-live-card reveal">
+            <div class="ag-live-top">
+              <div class="ag-live-brand">
+                <img src="https://www.google.com/s2/favicons?domain=github.com&sz=128" alt="GitHub" loading="lazy">
+                <h3>GitHub</h3>
+              </div>
+              <span class="ag-live-badge">Live API</span>
+            </div>
+            <div id="live-github-count" class="ag-live-value">—</div>
+            <div class="ag-live-label">public repositories</div>
+            <div id="live-github-meta" class="ag-live-meta">Checking the official GitHub API…</div>
+            <div id="live-github-feed" class="ag-live-feed">
+              <span class="ag-live-loading">Loading recent public activity…</span>
+            </div>
+            <div class="ag-live-actions">
+              <a href="https://github.com/Agaba52" target="_blank" rel="noopener">Open GitHub ↗</a>
+            </div>
+          </article>
+
+          <article class="ag-live-card reveal">
+            <div class="ag-live-top">
+              <div class="ag-live-brand">
+                <img src="https://www.google.com/s2/favicons?domain=tryhackme.com&sz=128" alt="TryHackMe" loading="lazy">
+                <h3>TryHackMe</h3>
+              </div>
+              <span class="ag-live-badge">Official profile</span>
+            </div>
+            <div class="ag-live-value">Agaba52</div>
+            <div class="ag-live-label">public security profile</div>
+            <div class="ag-live-meta">
+              Live profile data is kept on TryHackMe rather than copied into this page.
+              This avoids displaying stale or invented room/XP values.
+            </div>
+            <div class="ag-live-actions">
+              <a href="https://tryhackme.com/p/Agaba52" target="_blank" rel="noopener">Open TryHackMe ↗</a>
+            </div>
+          </article>
+
+          <article class="ag-live-card reveal">
+            <div class="ag-live-top">
+              <div class="ag-live-brand">
+                <img src="https://www.google.com/s2/favicons?domain=hackthebox.com&sz=128" alt="Hack The Box" loading="lazy">
+                <h3>Hack The Box</h3>
+              </div>
+              <span class="ag-live-badge">Public profile</span>
+            </div>
+            <div class="ag-live-value">HTB</div>
+            <div class="ag-live-label">profile &amp; achievements</div>
+            <div class="ag-live-meta">
+              HTB's public profile is the source of truth for current achievements, certifications and profile metrics.
+            </div>
+            <div class="ag-live-actions">
+              <a href="https://profile.hackthebox.com/profile/019eb26d-df5f-7379-a3b3-3111854d2792" target="_blank" rel="noopener">Open HTB ↗</a>
+            </div>
+          </article>
+
+          <article class="ag-live-card reveal">
+            <div class="ag-live-top">
+              <div class="ag-live-brand">
+                <img src="https://www.google.com/s2/favicons?domain=cybertalents.com&sz=128" alt="CyberTalents" loading="lazy">
+                <h3>CyberTalents</h3>
+              </div>
+              <span class="ag-live-badge">Official profile</span>
+            </div>
+            <div class="ag-live-value">CTF</div>
+            <div class="ag-live-label">challenges &amp; profile</div>
+            <div class="ag-live-meta">
+              Current challenge progress remains on the CyberTalents profile instead of being manually copied here.
+            </div>
+            <div class="ag-live-actions">
+              <a href="https://cybertalents.com/members/Agaba/profile" target="_blank" rel="noopener">Open CyberTalents ↗</a>
+            </div>
+          </article>
+
+          <article class="ag-live-card reveal">
+            <div class="ag-live-top">
+              <div class="ag-live-brand">
+                <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=128" alt="YouTube" loading="lazy">
+                <h3>YouTube</h3>
+              </div>
+              <span id="live-youtube-status" class="ag-live-status">API not configured</span>
+            </div>
+            <div id="live-youtube-count" class="ag-live-value">—</div>
+            <div class="ag-live-label">channel subscribers</div>
+            <div id="live-youtube-meta" class="ag-live-meta">
+              Add your public YouTube channel ID to AGABA_LIVE_CONFIG to load real channel statistics.
+            </div>
+            <div id="live-youtube-feed" class="ag-live-feed"></div>
+            <div class="ag-live-actions">
+              <a href="https://www.youtube.com/" target="_blank" rel="noopener">Open YouTube ↗</a>
+            </div>
+          </article>
+
+          <article class="ag-live-card reveal">
+            <div class="ag-live-top">
+              <div class="ag-live-brand">
+                <img src="https://www.google.com/s2/favicons?domain=nira.go.ug&sz=128" alt="NIRA Uganda" loading="lazy">
+                <h3>NIRA Uganda</h3>
+              </div>
+              <span class="ag-live-status">Official source</span>
+            </div>
+            <div class="ag-live-value">IT</div>
+            <div class="ag-live-label">professional experience</div>
+            <div class="ag-live-meta">
+              NIRA does not expose a public personal employee/volunteer activity API. Your experience remains represented
+              by the portfolio content and official organisation link.
+            </div>
+            <div class="ag-live-actions">
+              <a href="https://www.nira.go.ug/" target="_blank" rel="noopener">Open NIRA ↗</a>
+            </div>
+          </article>
+
+          <article class="ag-live-card reveal">
+            <div class="ag-live-top">
+              <div class="ag-live-brand">
+                <img src="https://www.google.com/s2/favicons?domain=amity.edu&sz=128" alt="Amity University" loading="lazy">
+                <h3>Amity University</h3>
+              </div>
+              <span class="ag-live-status">Official source</span>
+            </div>
+            <div class="ag-live-value">BCA</div>
+            <div class="ag-live-label">First Class degree</div>
+            <div class="ag-live-meta">
+              The portfolio keeps your degree claim intact; a personal academic activity feed is not publicly exposed by the university.
+            </div>
+            <div class="ag-live-actions">
+              <a href="https://amity.edu/" target="_blank" rel="noopener">Open Amity ↗</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== PROJECTS TEASER ===================== -->
     <section class="py-20 sm:py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
@@ -517,62 +940,239 @@
   </footer>
 
   <script>
-    /* Fast-typist headline: bursts of letters with tiny human-like pauses */
+    var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Slow typist headline: the whole line takes about 3 seconds */
     (function () {
       var el = document.getElementById('h1-text');
-      var full = [{t: "Hi, I'm "}, {t: "Agaba Abel", c: "name"}];
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        el.innerHTML = "Hi, I'm <span class='name'>Agaba Abel</span>"; return;
-      }
-      var seg = 0, i = 0, cur = null;
+      if (!el) return;
+      if (REDUCED) { el.innerHTML = "Hi, I'm <span class='name'>Agaba Abel</span>"; return; }
+      var chars = [], a = "Hi, I'm ", b = "Agaba Abel", i;
+      for (i = 0; i < a.length; i++) chars.push({ c: a[i] });
+      for (i = 0; i < b.length; i++) chars.push({ c: b[i], n: true });
+      var TOTAL = 3000, base = TOTAL / chars.length, idx = 0, plain = null, name = null;
       function step() {
-        if (seg >= full.length) return;
-        if (i === 0) { cur = document.createElement('span'); if (full[seg].c) cur.className = full[seg].c; el.appendChild(cur); }
-        var ch = document.createElement('span'); ch.className = 'ch';
-        ch.textContent = full[seg].t[i]; cur.appendChild(ch); i++;
-        if (i >= full[seg].t.length) { seg++; i = 0; }
-        var ch0 = full[seg - (i === 0 ? 1 : 0)] ? ch.textContent : '';
-        setTimeout(step, ch0 === ',' || ch0 === ' ' ? 110 : 28 + Math.random() * 40);
+        if (idx >= chars.length) return;
+        var it = chars[idx++], host;
+        if (it.n) { if (!name) { name = document.createElement('span'); name.className = 'name'; el.appendChild(name); } host = name; }
+        else { if (!plain) { plain = document.createElement('span'); el.appendChild(plain); } host = plain; }
+        var ch = document.createElement('span'); ch.className = 'ch'; ch.textContent = it.c; host.appendChild(ch);
+        var jitter = (Math.random() - 0.5) * base * 0.5;
+        setTimeout(step, Math.max(60, base + jitter));
       }
-      setTimeout(step, 350);
+      setTimeout(step, 400);
     })();
 
-    /* Dynamic SOC services list (cycles 3 at a time) */
+    /* Services to offer: 5 at a time, the rest swap in and out */
     (function () {
       var services = [
-  ["Mobile money fraud", "&  threat analysis"],
-  ["24/7 SOC alert monitoring", "& incident triage"],
-  ["SIEM deployment", "& tuning (Wazuh Lab)"],
-  ["Phishing simulation", "& social engineering defense"],
-  ["Incident response", "playbooks & crisis escalation"],
-  ["Threat hunting", "& IOC enrichment"],
-  ["Vulnerability assessment", "& remediation reporting"],
-  ["Firewall log review", "& rule optimization"],
-  ["Staff cybersecurity", "awareness & hygiene training"],
-  ["Compliance readiness", "( Data Protection Act)"]
-];
-      var list = document.getElementById('svc-list'), dots = document.getElementById('svc-dots');
+        ["Installing Wazuh SIEM", "& multi-node endpoint agents"],
+        ["Firewall deployment", "& secure network configuration"],
+        ["In/Out traffic architecture", "& perimeter security design"],
+        ["Centralized log collection", "& threat telemetry aggregation"],
+        ["Intrusion detection", "& automated alerting rules"],
+        ["Penetration testing", "& offensive security assessment"],
+        ["Vulnerability searching", "& systematic risk discovery"],
+        ["System & software patching", "& remediation hardening"],
+        ["Open-source security tools", "& custom detection builds"],
+        ["Staff security training", "& practical phishing simulations"],
+        ["Mobile money fraud analysis", "& scam-pattern reporting"],
+        ["Phishing email triage", "& incident response write-ups"],
+        ["Data Protection and Privacy Act", "compliance readiness (Uganda)"],
+        ["Security checks for SACCOs, SMEs", "& schools on a small budget"],
+        ["On-demand IT support", "& network troubleshooting"]
+      ];
+      var list = document.getElementById('svc-list'), count = document.getElementById('svc-count'), bar = document.getElementById('svc-progress');
       if (!list) return;
-      var PER = 3, page = 0, pages = Math.ceil(services.length / PER);
-      for (var p = 0; p < pages; p++) dots.appendChild(document.createElement('span'));
+      var PER = 5, n = services.length, pages = Math.ceil(n / PER), page = 0;
+      function pad(x) { return (x < 10 ? '0' : '') + x; }
       function render() {
         list.innerHTML = '';
         for (var k = 0; k < PER; k++) {
-          var s = services[(page * PER + k) % services.length];
+          var num = page * PER + k, s = services[num % n];
           var li = document.createElement('li');
-          li.style.animationDelay = (k * 0.18) + 's';
-          li.innerHTML = '<span><b>' + s[0] + '</b> ' + s[1] + '</span>';
+          li.style.setProperty('--d', (k * 0.11) + 's');
+          li.innerHTML = '<span class="n">' + pad(num + 1) + '</span><span><b>' + s[0] + '</b><small>' + s[1] + '</small></span>';
           list.appendChild(li);
         }
-        Array.prototype.forEach.call(dots.children, function (d, n) { d.className = n === page ? 'on' : ''; });
+        count.textContent = pad(page * PER + 1) + '–' + pad(Math.min((page + 1) * PER, n)) + ' / ' + n;
+        if (!REDUCED) { bar.classList.remove('run'); void bar.offsetWidth; bar.classList.add('run'); }
       }
       function next() {
-        Array.prototype.forEach.call(list.children, function (li) { li.classList.add('out'); });
-        setTimeout(function () { page = (page + 1) % pages; render(); }, 380);
+        Array.prototype.forEach.call(list.children, function (li, k) {
+          li.style.setProperty('--o', ((PER - 1 - k) * 0.07) + 's');
+          li.classList.add('out');
+        });
+        setTimeout(function () { page = (page + 1) % pages; render(); }, 600);
       }
-      render(); setInterval(next, 3600);
+      render();
+      if (REDUCED) { setInterval(next, 6000); }
+      else { bar.addEventListener('animationend', next); }
+    })();
+
+    /* Cursor spotlight in hero + gentle tilt on the services panel */
+    (function () {
+      if (REDUCED) return;
+      var hero = document.getElementById('home'), spot = document.getElementById('hero-spot'), shell = document.getElementById('svc-shell');
+      if (hero && spot) {
+        hero.addEventListener('pointermove', function (e) {
+          var r = hero.getBoundingClientRect();
+          spot.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          spot.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+      }
+      if (shell && window.matchMedia('(hover:hover)').matches) {
+        shell.addEventListener('pointermove', function (e) {
+          var r = shell.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+          shell.style.transform = 'perspective(900px) rotateY(' + (x * 7) + 'deg) rotateX(' + (-y * 7) + 'deg)';
+        });
+        shell.addEventListener('pointerleave', function () { shell.style.transform = ''; });
+      }
     })();
   </script>
+
+  <script>
+    /* =========================================================
+       REAL PUBLIC DATA — additive only
+       GitHub: public API, no key required.
+       YouTube: official Data API, requires a channel ID + API key.
+       Other platforms stay linked to their official live profiles.
+       ========================================================= */
+    window.AGABA_LIVE_CONFIG = window.AGABA_LIVE_CONFIG || {
+      githubUsername: 'Agaba52',
+      youtubeChannelId: '',
+      youtubeApiKey: ''
+    };
+
+    (function () {
+      var cfg = window.AGABA_LIVE_CONFIG;
+
+      function esc(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function dateText(value) {
+        try {
+          return new Intl.DateTimeFormat(undefined, {
+            year: 'numeric', month: 'short', day: 'numeric'
+          }).format(new Date(value));
+        } catch (_) { return ''; }
+      }
+
+      function loadGitHub() {
+        var count = document.getElementById('live-github-count');
+        var meta = document.getElementById('live-github-meta');
+        var feed = document.getElementById('live-github-feed');
+        if (!count || !cfg.githubUsername) return;
+
+        fetch('https://api.github.com/users/' + encodeURIComponent(cfg.githubUsername))
+          .then(function (r) {
+            if (!r.ok) throw new Error('GitHub profile request failed');
+            return r.json();
+          })
+          .then(function (user) {
+            count.textContent = Number(user.public_repos || 0).toLocaleString();
+            meta.innerHTML =
+              '<span class="ag-live-status ok">LIVE</span> · public GitHub API · checked ' +
+              esc(new Date().toLocaleTimeString());
+          })
+          .catch(function () {
+            meta.innerHTML =
+              '<span class="ag-live-status err">Unavailable</span> · Open GitHub for the current profile.';
+          });
+
+        fetch('https://api.github.com/users/' + encodeURIComponent(cfg.githubUsername) + '/events/public?per_page=5')
+          .then(function (r) {
+            if (!r.ok) throw new Error('GitHub activity request failed');
+            return r.json();
+          })
+          .then(function (events) {
+            if (!Array.isArray(events) || !events.length) {
+              feed.innerHTML = '<span class="ag-live-loading">No recent public events returned.</span>';
+              return;
+            }
+            feed.innerHTML = events.slice(0, 4).map(function (e) {
+              var repo = e.repo && e.repo.name ? e.repo.name : 'GitHub';
+              var type = e.type ? e.type.replace(/Event$/, '') : 'Activity';
+              return '<a href="https://github.com/' + encodeURIComponent(repo) +
+                '" target="_blank" rel="noopener">' +
+                '<strong>' + esc(type) + '</strong>' +
+                '<small>' + esc(repo) + ' · ' + esc(dateText(e.created_at)) + '</small></a>';
+            }).join('');
+          })
+          .catch(function () {
+            feed.innerHTML = '<span class="ag-live-loading">Recent activity unavailable from the public API.</span>';
+          });
+      }
+
+      function loadYouTube() {
+        var status = document.getElementById('live-youtube-status');
+        var count = document.getElementById('live-youtube-count');
+        var meta = document.getElementById('live-youtube-meta');
+        var feed = document.getElementById('live-youtube-feed');
+
+        if (!status || !count || !meta) return;
+
+        if (!cfg.youtubeChannelId || !cfg.youtubeApiKey) return;
+
+        var url = 'https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,contentDetails&id=' +
+          encodeURIComponent(cfg.youtubeChannelId) + '&key=' + encodeURIComponent(cfg.youtubeApiKey);
+
+        fetch(url)
+          .then(function (r) {
+            if (!r.ok) throw new Error('YouTube API request failed');
+            return r.json();
+          })
+          .then(function (data) {
+            if (!data.items || !data.items.length) throw new Error('Channel not found');
+            var channel = data.items[0];
+            status.className = 'ag-live-badge';
+            status.textContent = 'Live API';
+            count.textContent = Number(channel.statistics.subscriberCount || 0).toLocaleString();
+            meta.innerHTML = 'LIVE · YouTube Data API · ' +
+              esc(channel.snippet.title || 'Channel') + ' · checked ' +
+              esc(new Date().toLocaleTimeString());
+
+            var uploads = channel.contentDetails &&
+              channel.contentDetails.relatedPlaylists &&
+              channel.contentDetails.relatedPlaylists.uploads;
+
+            if (uploads && feed) {
+              var videosUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=4&playlistId=' +
+                encodeURIComponent(uploads) + '&key=' + encodeURIComponent(cfg.youtubeApiKey);
+
+              fetch(videosUrl).then(function (r) {
+                if (!r.ok) throw new Error('YouTube uploads request failed');
+                return r.json();
+              }).then(function (data2) {
+                if (!data2.items) return;
+                feed.innerHTML = data2.items.map(function (item) {
+                  var id = item.snippet && item.snippet.resourceId && item.snippet.resourceId.videoId;
+                  var title = item.snippet && item.snippet.title;
+                  return id ? '<a href="https://www.youtube.com/watch?v=' + encodeURIComponent(id) +
+                    '" target="_blank" rel="noopener"><strong>' + esc(title) +
+                    '</strong><small>Published ' + esc(dateText(item.snippet.publishedAt)) +
+                    '</small></a>' : '';
+                }).join('');
+              }).catch(function () {});
+            }
+          })
+          .catch(function () {
+            status.className = 'ag-live-status err';
+            status.textContent = 'Unavailable';
+            meta.textContent = 'YouTube API could not be reached. The official channel link remains available.';
+          });
+      }
+
+      loadGitHub();
+      loadYouTube();
+    })();
+  </script>
+
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
